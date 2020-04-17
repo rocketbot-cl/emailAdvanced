@@ -1,4 +1,4 @@
-# Gmail
+# Email Advanced
 This module is an Rocketbot Email command extension
 
 > Only use with native email command.
