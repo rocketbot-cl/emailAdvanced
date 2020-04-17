@@ -114,7 +114,7 @@
     },
     {
       "en": {
-        "title": "Mover Email de carpeta",
+        "title": "Move email to folder",
         "description": "Módulos para mover emails de carpeta para servidores de correos IMAP",
         "title_options": "Select Option",
         "options": null

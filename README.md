@@ -3,6 +3,13 @@ This module is an Rocketbot Email command extension
 
 > Only use with native email command.
 
+## Commands
+- Send advanced email
+- Move email to folder
+- Read all data from email
+- Mark email as unread
+- List Folders
+
 
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/emailAdvanced/master/example/email.png)
 
