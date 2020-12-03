@@ -9,6 +9,7 @@ This module is an Rocketbot Email command extension
 - Read all data from email
 - Mark email as unread
 - List Folders
+- Connect Imap
 
 
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/emailAdvanced/master/example/email.png)

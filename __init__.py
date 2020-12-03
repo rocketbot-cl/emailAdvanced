@@ -42,7 +42,17 @@ def get_first_text_block(msg):
         return msg.get_payload()
 
 
+class EmailAdvanced:
+    def __init__(self, host, port, user, password, ssl):
+        self.host = host
+        self.port = port
+        self.user = user
+        self.password = password
+        self.ssl = ssl
+
+
 module = GetParams('module')
+global email_advanced
 
 
 def parse_uid(tmp):
@@ -96,22 +106,37 @@ if module == "MoveMail":
         raise e
 
 if module == "LeerTodo":
-    imap = GetGlobals('email')
+
     id_correo = GetParams('id_correo')
     result = GetParams('result')
     path_mail = GetParams('path_mail')
     path_attachment = GetParams('path_attachment')
 
-    if imap.IMAP_SSL:
-        imap.server_imap = imaplib.IMAP4_SSL(imap.IMAP_SERVER, imap.IMAP_PORT)
+    try:
+        print("Get email global object")
+        imap = GetGlobals('email')
+        host = imap.IMAP_SERVER
+        port = imap.IMAP_PORT
+        ssl = imap.IMAP_SSL
+        user = imap.FROM_EMAIL
+        password = imap.FROM_PWD
+    except:
+        host = email_advanced.host
+        port = email_advanced.port
+        ssl = email_advanced.ssl
+        user = email_advanced.user
+        password = email_advanced.password
+
+    if ssl:
+        server = imaplib.IMAP4_SSL(host, port)
     else:
-        imap.server_imap = imaplib.IMAP4(imap.IMAP_SERVER, imap.IMAP_PORT)
-    imap.server_imap.login(imap.FROM_EMAIL, imap.FROM_PWD)
-    imap.server_imap.select(imap.EMAIL_FOLDER, readonly=False)
+        server = imaplib.IMAP4(host, port)
+    server.login(user, password)
+    server.select('inbox', readonly=False)
 
     try:
         if id_correo:
-            rv, data = imap.server_imap.fetch(id_correo, '(RFC822)')
+            rv, data = server.fetch(id_correo, '(RFC822)')
             bt = data[0][1]
             # msg = email.message_from_bytes(data[0][1])
             mm = mailparser.parse_from_bytes(data[0][1])
@@ -152,8 +177,8 @@ if module == "LeerTodo":
                         file_.close()
             if result:
                 SetVar(result, datos)
-            imap.server_imap.close()
-            imap.server_imap.logout()
+            server.close()
+            server.logout()
     except Exception as e:
         PrintException()
         raise e
@@ -211,7 +236,7 @@ if module == "sendEmail":
     filenames = []
 
     try:
-        print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
+        # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
         server = smtplib.SMTP(email.SMTP_SERVER, email.SMTP_PORT)
         server.starttls()
         server.login(email.FROM_EMAIL, email.FROM_PWD)
@@ -265,6 +290,31 @@ if module == "sendEmail":
         # server.close()
 
     except Exception as e:
+        PrintException()
+        raise e
+
+if module == "ConnectImap":
+    host = GetParams("host")
+    port = GetParams("port")
+    user = GetParams("user")
+    pwd = GetParams("pass")
+    ssl = GetParams("ssl")
+    result = GetParams("result")
+
+    try:
+
+        ssl = False if ssl is None else ssl
+        port = int(port)
+        if ssl:
+            server = imaplib.IMAP4_SSL(host, port)
+        else:
+            server = imaplib.IMAP4(host, port)
+
+        server.login(user, pwd)
+        email_advanced = EmailAdvanced(host, port, user, pwd, ssl)
+
+    except Exception as e:
+        SetVar(result, False)
         PrintException()
         raise e
 
