@@ -9,7 +9,7 @@
   "mac": true,
   "docker": true,
   "name": "emailAdvanced",
-  "version": "2.0",
+  "version": "2.1",
   "title": {
     "en": "Email avanzado",
     "es": "Email avanzado",

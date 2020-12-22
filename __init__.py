@@ -1,27 +1,32 @@
 # coding: utf-8
-import base64
-import email
-import os
-from email import generator
-import imaplib
-import smtplib
-from email import encoders
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import re
-import sys
+try:
+    import base64
+    import email
+    import os
+    from email import generator
+    import imaplib
+    import smtplib
+    from email import encoders
+    from email.mime.base import MIMEBase
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    import re
+    import sys
 
-base_path = tmp_global_obj["basepath"]
-cur_path = base_path + 'modules' + os.sep + 'emailAdvanced' + os.sep + 'libs' + os.sep
-sys.path.append(cur_path)
-import mailparser
-from bs4 import BeautifulSoup
+    base_path = tmp_global_obj["basepath"]
+    cur_path = base_path + 'modules' + os.sep + 'emailAdvanced' + os.sep + 'libs' + os.sep
+    sys.path.append(cur_path)
+    import mailparser
+    from bs4 import BeautifulSoup
 
-outenc = sys.stdout.encoding or sys.getfilesystemencoding()
+    outenc = sys.stdout.encoding or sys.getfilesystemencoding()
 
-global pattern_uid
-pattern_uid = re.compile('\d+ \(UID (?P<uid>\d+)\)')
+    global pattern_uid
+    pattern_uid = re.compile('\d+ \(UID (?P<uid>\d+)\)')
+
+except Exception as e:
+    PrintException()
+    raise e
 
 
 def parse_mailbox(data):
@@ -237,8 +242,11 @@ if module == "sendEmail":
 
     try:
         # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
-        server = smtplib.SMTP(email.SMTP_SERVER, email.SMTP_PORT)
-        server.starttls()
+        if email.SSL:
+            server = smtplib.SMTP_SSL(email.SMTP_SERVER, email.SMTP_PORT)
+        else:
+            server = smtplib.SMTP(email.SMTP_SERVER, email.SMTP_PORT)
+            server.starttls()
         server.login(email.FROM_EMAIL, email.FROM_PWD)
         msg = MIMEMultipart()
         msg['From'] = email.FROM_EMAIL
