@@ -48,12 +48,14 @@ def get_first_text_block(msg):
 
 
 class EmailAdvanced:
-    def __init__(self, host, port, user, password, ssl):
+    def __init__(self, host, port, user, password, ssl, imap=False, smtp=False):
         self.host = host
         self.port = port
         self.user = user
         self.password = password
         self.ssl = ssl
+        self.imap = imap
+        self.smtp = smtp
 
 
 module = GetParams('module')
@@ -239,17 +241,40 @@ if module == "sendEmail":
     attached_file = GetParams('path')
     files = GetParams('folder')
     filenames = []
-
+    alternative = False
     try:
-        # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
-        if email.SSL:
-            server = smtplib.SMTP_SSL(email.SMTP_SERVER, email.SMTP_PORT)
+
+        try:
+            alternative = email_advanced.smtp
+        except:
+            pass
+
+        if alternative:
+            host = email_advanced.host
+            port = email_advanced.port
+            ssl = email_advanced.ssl
+            user = email_advanced.user
+            password = email_advanced.password
         else:
-            server = smtplib.SMTP(email.SMTP_SERVER, email.SMTP_PORT)
+            host = email.SMTP_SERVER
+            port = email.SMTP_PORT
+            ssl = email.SSL
+            user = email.FROM_EMAIL
+            password = email.FROM_PWD
+
+
+
+        # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
+        if ssl:
+            server = smtplib.SMTP_SSL(host, port)
+        else:
+            server = smtplib.SMTP(host, port)
             server.starttls()
-        server.login(email.FROM_EMAIL, email.FROM_PWD)
+
+        if user:
+            server.login(user, password)
         msg = MIMEMultipart()
-        msg['From'] = email.FROM_EMAIL
+        msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
         msg['Subject'] = subject
@@ -294,7 +319,7 @@ if module == "sendEmail":
                     msg.attach(part)
 
         text = msg.as_string()
-        server.sendmail(email.FROM_EMAIL, toAddress, text)
+        server.sendmail(user, toAddress, text)
         # server.close()
 
     except Exception as e:
@@ -318,12 +343,37 @@ if module == "ConnectImap":
         else:
             server = imaplib.IMAP4(host, port)
 
-        server.login(user, pwd)
-        email_advanced = EmailAdvanced(host, port, user, pwd, ssl)
+        if not user:
+            server.login(user, pwd)
+        email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=True)
 
     except Exception as e:
         SetVar(result, False)
         PrintException()
         raise e
 
+if module == "ConnectSmtp":
+    host = GetParams("host")
+    port = GetParams("port")
+    user = GetParams("user")
+    pwd = GetParams("pass")
+    ssl = GetParams("ssl")
+    result = GetParams("result")
+
+    try:
+
+        ssl = False if ssl is None else ssl
+        port = int(port)
+        if ssl:
+            server = smtplib.SMTP_SSL(host, port)
+        else:
+            server = smtplib.SMTP(host, port)
+
+        server.login(user, pwd)
+        email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=True)
+
+    except Exception as e:
+        SetVar(result, False)
+        PrintException()
+        raise e
 
