@@ -1,5 +1,5 @@
 {
-  "author": "José González - Rocketbot <jose@rocketbot.cl>",
+  "author": "José González - Danilo Toro - Rocketbot",
   "description": "Módulo con opciones avanzadas para el manejo de correos",
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "mac": true,
   "docker": true,
   "name": "emailAdvanced",
-  "version": "2.1",
+  "version": "3.0",
   "title": {
     "en": "Email avanzado",
     "es": "Email avanzado",
@@ -72,7 +72,7 @@
             "css": "col-md-12"
           },
           {
-            "type": "input",
+            "type": "textarea",
             "placeholder": "Hi person. This message was sent from Rocketbot. Bye",
             "title": {
               "es": "Mensaje",
