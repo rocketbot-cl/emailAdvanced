@@ -4,6 +4,7 @@ try:
     import base64
     import os
     from email import generator
+    import email
     import imaplib
     import smtplib
     from email import encoders
@@ -158,14 +159,21 @@ try:
         if id_correo:
             rv, data = server.fetch(id_correo, '(RFC822)')
             bt = data[0][1]
+            try:
+                raw_email_string = bt.decode('utf-8')
+            except:
+                raw_email_string = bt.decode('latin-1')
+            email_message = email.message_from_string(raw_email_string)
             # msg = email.message_from_bytes(data[0][1])
-            mm = mailparser.parse_from_bytes(data[0][1])
+            mm = mailparser.parse_from_string(raw_email_string)
             # print(mm.attachments)
             bs = ''
             try:
                 bs = BeautifulSoup(mm.body, 'html.parser').body.get_text()
             except:
                 bs = mm.body
+
+            bs = bs.split('--- mail_boundary ---')[0]
             # print('body', mm.date.__str__())
             to = ", ".join([b for (a, b) in mm.to])
             from_ = ", ".join([b for (a, b) in mm.from_])
@@ -257,9 +265,10 @@ try:
             server = smtplib.SMTP_SSL(host, port)
         else:
             server = smtplib.SMTP(host, port)
-            server.starttls()
+            
 
         if user and password:
+            server.starttls()
             server.login(user, password)
         msg = MIMEMultipart()
         msg['From'] = user
