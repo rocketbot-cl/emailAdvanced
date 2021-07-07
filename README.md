@@ -14,6 +14,10 @@ This module is an Rocketbot Email command extension
 
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/emailAdvanced/master/example/email.png)
 
+## Updates
+### 7-Jul-2021
+- Prevent starttls error for ssl connections
+
 
 <h2>Dependencies</h2>
 

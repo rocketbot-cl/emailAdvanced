@@ -52,7 +52,7 @@ def get_first_text_block(msg):
 
 
 global  mod_email_advanced_sessions
-SESSION_DEFAULT = "gmail"
+SESSION_DEFAULT = "default"
 # Initialize settings for the module here
 try:
     if not mod_email_advanced_sessions:
@@ -261,15 +261,20 @@ try:
         password = smtp.FROM_PWD
 
         # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
+        
         if ssl:
             server = smtplib.SMTP_SSL(host, port)
         else:
             server = smtplib.SMTP(host, port)
+        
+        if user and password:
+            try:
+                server.starttls()
+            except:
+                pass
+            server.login(user, password)
             
 
-        if user and password:
-            server.starttls()
-            server.login(user, password)
         msg = MIMEMultipart()
         msg['From'] = user
         msg['To'] = to_
@@ -360,11 +365,14 @@ try:
             port = int(port)
             if ssl:
                 server = smtplib.SMTP_SSL(host, port)
+        
             else:
                 server = smtplib.SMTP(host, port)
-
-            if user and pwd:
+            try:
                 server.starttls()
+            except:
+                pass
+            if user and pwd:
                 server.login(user, pwd)
             email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=True)
             mod_email_advanced_sessions[session] = {"email": email_advanced, "imap": False, "smpt": True}
