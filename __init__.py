@@ -381,6 +381,23 @@ try:
             SetVar(result, False)
             PrintException()
             raise e
+        
+    if module == "validate_email":
+        from validate_email import validate_email
+        import DNS
+        email = GetParams("email")
+        result = GetParams("result")
+        try:
+            is_valid = validate_email(email,verify=True)
+            if is_valid:
+                SetVar(result, True)
+            else:
+                SetVar(result, False)
+        except Exception as e:
+            print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+            PrintException()
+            raise e
+
 except Exception as e:
         PrintException()
         raise e
