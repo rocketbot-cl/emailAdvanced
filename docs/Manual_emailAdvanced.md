@@ -6,7 +6,7 @@
   
 Módulo con opciones avanzadas para el manejo de correos  
   
-![banner](/docs/imgs/Banner_emailAdvanced.png)
+![banner](https://i.imgur.com/7Nxak0w.png)
 ## Como instalar este módulo
   
 __Descarga__ e __instala__ el contenido en la carpeta 'modules' en la ruta de rocketbot.  
