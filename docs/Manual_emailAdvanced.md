@@ -1,3 +1,3 @@
 ## emailAdvanced
 
- view the documentation at: https://github.com/rocketbot-cl/SAPB1/blob/master/example/Manual_emailAdvanced.pdf
+ view the documentation at: https://github.com/rocketbot-cl/emailAdvanced/blob/master/example/Manual_emailAdvanced.pdf
