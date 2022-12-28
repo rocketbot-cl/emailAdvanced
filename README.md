@@ -1,15 +1,16 @@
-
-
-
-
 # Email avanzado
   
-Módulo con opciones avanzadas para el manejo de correos  
+Module with advanced options for mail management  
 
-## Howto install this module
+*Read this in other languages: [English](README.md), [Español](README.es.md).*
+
+## How to install this module
   
 __Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
+
+## How to use this module
+The emailAdvanced module must be used in conjunction with the native email module. As a first action, we must go to the modules section and look for the "Email" module, then "SMTP-IMAP" and use the "Configure server" command. We must complete the fields with the data of the server, port, password and mail. Check SSL if necessary. Once this is done, we will be able to use the module commands.
 
 
 ## Overview
