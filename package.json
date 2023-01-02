@@ -10,7 +10,7 @@
   "docker": true,
   "type": "module",
   "name": "emailAdvanced",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "title": {
     "en": "Email avanzado",
     "es": "Email avanzado",
