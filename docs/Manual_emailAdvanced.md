@@ -1,3 +1,4 @@
+
 # Email avanzado
   
 Module with advanced options for mail management  
@@ -102,3 +103,4 @@ Forward email for ID
 |Email ID|Email ID to forward|355|
 |Email|Email that will receive the mail|test@email.com|
 |Subject|Subject of the email|Subject|
+
