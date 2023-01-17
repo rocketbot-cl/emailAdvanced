@@ -22,10 +22,13 @@ try:
 
     # external libraries
     import mailparser
+    from mailparser import mailparser
+    from mail_common import Mail
     from bs4 import BeautifulSoup
     outenc = sys.stdout.encoding or sys.getfilesystemencoding()
 
     global pattern_uid
+    
     pattern_uid = re.compile('\d+ \(UID (?P<uid>\d+)\)')
 
 except Exception as e:
@@ -61,12 +64,16 @@ except NameError:
     mod_email_advanced_sessions = {SESSION_DEFAULT: {"email": GetGlobals('email'), "smtp": True, "imap": True}}
 
 
-class EmailAdvanced:
-    def __init__(self, host, port, user, password, ssl, imap=False, smtp=False):
+
+class EmailAdvanced(Mail):
+    def __init__(self, host, port, user, password, ssl, imap=False, smtp=False, timeout=99):
         self.IMAP_SERVER = host if imap else None
         self.SMTP_SERVER = host if smtp else None
         self.SMTP_PORT = port if smtp else None
         self.IMAP_PORT = port if imap else None
+        super().__init__(user, password, timeout,
+                                        smtp_host=self.SMTP_SERVER, smtp_port=self.SMTP_PORT,
+                                        imap_host=self.IMAP_SERVER, imap_port=self.IMAP_PORT)
         self.FROM_EMAIL = user
         self.FROM_PWD = password
         self.SSL = ssl if smtp else None
@@ -76,13 +83,22 @@ class EmailAdvanced:
     def connect(self):
         pass
 
+    def connect_imap(self):
+                try:
+                    self.imap = imaplib.IMAP4_SSL(self.imap_host, 993)
+                except:
+                    self.imap = imaplib.IMAP4(self.imap_host, 465)
+
+                self.imap.login(self.FROM_EMAIL, self.FROM_PWD)
+                return self.imap
+
 
 module = GetParams('module')
 session = GetParams("session")
 if not session:
     session = SESSION_DEFAULT
 global email_advanced
-
+session_global = mod_email_advanced_sessions[session]
 
 def parse_uid(tmp):
     print('tmp', tmp)
@@ -341,11 +357,18 @@ try:
                 server = imaplib.IMAP4_SSL(host, port)
             else:
                 server = imaplib.IMAP4(host, port)
-
+            
             if user and pwd:
                 server.login(user, pwd)
-            email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=True)
-            mod_email_advanced_sessions[session] = {"email": email_advanced, "imap": True, "smpt": False}
+            if "smtp" in session_global and session_global["smtp"]:
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=False)
+            email_advanced = mod_email_advanced_sessions[session]["email"]
+            email_advanced.IMAP_PORT = port
+            email_advanced.IMAP_SERVER = host
+            email_advanced.FROM_EMAIL = user
+            email_advanced.FROM_PWD = pwd
+            mod_email_advanced_sessions[session]["email"] = email_advanced
+            mod_email_advanced_sessions[session]["imap"] = True
             SetVar(result, True)
         except Exception as e:
             SetVar(result, False)
@@ -374,8 +397,16 @@ try:
                 pass
             if user and pwd:
                 server.login(user, pwd)
-            email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=True)
-            mod_email_advanced_sessions[session] = {"email": email_advanced, "imap": False, "smpt": True}
+            if "imap" in session_global and session_global["imap"]:
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=False)
+            email_advanced = mod_email_advanced_sessions[session]["email"]
+            email_advanced.FROM_EMAIL = user
+            email_advanced.FROM_PWD = pwd
+
+            email_advanced.SMTP_PORT = port
+            email_advanced.SMTP_SERVER = host
+            mod_email_advanced_sessions[session]["email"] = email_advanced
+            mod_email_advanced_sessions[session]["smtp"] = True
             SetVar(result, True)
         except Exception as e:
             SetVar(result, False)
@@ -395,6 +426,42 @@ try:
                 SetVar(result, False)
         except Exception as e:
             print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+            PrintException()
+            raise e
+    
+        
+    if module == "forward":
+        id_ = GetParams('id_')
+        to_ = GetParams('email')
+        result_ = GetParams('result')
+        subject = GetParams('subject')
+        try:
+            email_advanced = mod_email_advanced_sessions[session]["email"]
+            
+            from shutil import rmtree
+
+            temp_folder = cur_path + "temp"
+            if not os.path.exists(temp_folder):
+                os.mkdir(temp_folder)
+            smtp = mod_email_advanced_sessions[session]["email"]
+            smtp_host = smtp.SMTP_SERVER
+            smtp_port = smtp.SMTP_PORT
+            ssl_smtp = smtp.SSL
+            user = smtp.FROM_EMAIL
+            password = smtp.FROM_PWD
+
+            imap = mod_email_advanced_sessions[session]["email"]
+            imap_host = imap.IMAP_SERVER
+            imap_port = imap.IMAP_PORT
+            ssl_imap = imap.IMAP_SSL
+            from mail_common import Mail
+            mail = Mail(user, password, 99,
+                    smtp_host=smtp_host, smtp_port=smtp_port,
+                    imap_host=imap_host, imap_port=imap_port)
+
+            mail.forward_email(id_, "inbox", temp_folder, to_, subject)
+            rmtree(temp_folder)
+        except Exception as e:
             PrintException()
             raise e
 

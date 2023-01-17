@@ -1,46 +1,62 @@
-# Email Advanced
-This module is an Rocketbot Email command extension
+# Email avanzado
+  
+Module with advanced options for mail management  
 
-> Only use with native email command.
+*Read this in other languages: [English](README.md), [Español](README.es.md).*
 
-## Commands
-- Send advanced email
-- Move email to folder
-- Read all data from email
-- Mark email as unread
-- List Folders
-- Connect Imap
+## How to install this module
+  
+__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
 
-![alt text](https://raw.githubusercontent.com/rocketbot-cl/emailAdvanced/master/example/email.png)
-
-## Updates
-### 7-Jul-2021
-- Prevent starttls error for ssl connections
+## How to use this module
+The emailAdvanced module must be used in conjunction with the native email module. As a first action, we must go to the modules section and look for the "Email" module, then "SMTP-IMAP" and use the "Configure server" command. We must complete the fields with the data of the server, port, password and mail. Check SSL if necessary. Once this is done, we will be able to use the module commands.
 
 
-<h2>Dependencies</h2>
+## Overview
 
-<ul>
-  <li>
-    <strong>
-      <a href="https://pypi.org/project/beautifulsoup4/">beautifulsoup4</a>
-    </strong> 
-  </li>  
-</ul>  
 
-<ul>
-  <li>
-    <strong>
-      <a href="https://pypi.org/project/mail-parser/">mail-parser</a>
-    </strong> 
-  </li>  
-</ul>  
+1. Send advanced email  
+Command to send html format email, cc and multiple files
 
-<h2>License</h2>
+2. Move email to folder  
+Módulos para mover emails de carpeta para servidores de correos IMAP
 
-<p><a href="http://badges.mit-license.org" rel="nofollow"><img src="https://camo.githubusercontent.com/107590fac8cbd65071396bb4d04040f76cde5bde/687474703a2f2f696d672e736869656c64732e696f2f3a6c6963656e73652d6d69742d626c75652e7376673f7374796c653d666c61742d737175617265" alt="License" data-canonical-src="http://img.shields.io/:license-mit-blue.svg?style=flat-square" style="max-width:100%;"></a></p>
+3. Read all data from email  
+Read all data from email
 
-<ul>
-  <li><strong><a href="http://opensource.org/licenses/mit-license.php" rel="nofollow">MIT license</a></strong></li>
-</ul>  
+4. Mark mail as unread  
+Mark mail as unread by ID
+
+5. List email folders  
+List email folders
+
+6. Connect Imap  
+User only if native command not working to read emails
+
+7. Connect SMTP  
+User only if native command not working connection
+
+8. Validate emails  
+Validate emails
+
+9. Forward email for ID  
+Forward email for ID  
+
+
+
+
+----
+### OS
+
+- windows
+- mac
+- linux
+- docker
+
+### Dependencies
+
+### License
+  
+![MIT](https://camo.githubusercontent.com/107590fac8cbd65071396bb4d04040f76cde5bde/687474703a2f2f696d672e736869656c64732e696f2f3a6c6963656e73652d6d69742d626c75652e7376673f7374796c653d666c61742d737175617265)  
+[MIT](http://opensource.org/licenses/mit-license.ph)
