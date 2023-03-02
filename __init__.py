@@ -13,7 +13,8 @@ try:
     from email.mime.text import MIMEText
     import re
     import sys
-
+    import traceback
+    
     # Add the module's lib folder to the path
     base_path = tmp_global_obj["basepath"]
     cur_path = base_path + 'modules' + os.sep + 'emailAdvanced' + os.sep + 'libs' + os.sep
@@ -66,7 +67,7 @@ except NameError:
 
 
 class EmailAdvanced(Mail):
-    def __init__(self, host, port, user, password, ssl, imap=False, smtp=False, timeout=99):
+    def __init__(self, host, port, user, password, ssl=False, imap=False, smtp=False, timeout=99):
         self.IMAP_SERVER = host if imap else None
         self.SMTP_SERVER = host if smtp else None
         self.SMTP_PORT = port if smtp else None
@@ -278,7 +279,7 @@ try:
 
         # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
         
-        if ssl:
+        if ssl == True:
             server = smtplib.SMTP_SSL(host, port)
         else:
             server = smtplib.SMTP(host, port)
@@ -289,20 +290,23 @@ try:
             except:
                 pass
             server.login(user, password)
-            
-
+        
+        if not cc:
+            cc = ""
+        
         msg = MIMEMultipart()
         msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
         msg['Subject'] = subject
 
+        to_ = to_.split(",")
         if cc:
-
-            toAddress = to_.split(",") + cc.split(",")
+            cc = cc.split(",")
+            toAddress = to_ + cc
         else:
-            toAddress = to_.split(",")
-
+            toAddress = to_
+        
         if not body_:
             body_ = ""
         body = body_.replace("\n", "<br/>")
@@ -361,12 +365,13 @@ try:
             if user and pwd:
                 server.login(user, pwd)
             if "smtp" in session_global and session_global["smtp"]:
-                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=False)
-            email_advanced = mod_email_advanced_sessions[session]["email"]
-            email_advanced.IMAP_PORT = port
-            email_advanced.IMAP_SERVER = host
-            email_advanced.FROM_EMAIL = user
-            email_advanced.FROM_PWD = pwd
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=True, smtp=False)
+            else:
+                email_advanced = mod_email_advanced_sessions[session]["email"]
+                email_advanced.IMAP_PORT = port
+                email_advanced.IMAP_SERVER = host
+                email_advanced.FROM_EMAIL = user
+                email_advanced.FROM_PWD = pwd
             mod_email_advanced_sessions[session]["email"] = email_advanced
             mod_email_advanced_sessions[session]["imap"] = True
             SetVar(result, True)
@@ -388,7 +393,6 @@ try:
             port = int(port)
             if ssl:
                 server = smtplib.SMTP_SSL(host, port)
-        
             else:
                 server = smtplib.SMTP(host, port)
             try:
@@ -398,15 +402,17 @@ try:
             if user and pwd:
                 server.login(user, pwd)
             if "imap" in session_global and session_global["imap"]:
-                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=False)
-            email_advanced = mod_email_advanced_sessions[session]["email"]
-            email_advanced.FROM_EMAIL = user
-            email_advanced.FROM_PWD = pwd
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=False, smtp=True)
+            else:
+                email_advanced = mod_email_advanced_sessions[session]["email"]
+                email_advanced.FROM_EMAIL = user
+                email_advanced.FROM_PWD = pwd
 
-            email_advanced.SMTP_PORT = port
-            email_advanced.SMTP_SERVER = host
+                email_advanced.SMTP_PORT = port
+                email_advanced.SMTP_SERVER = host
             mod_email_advanced_sessions[session]["email"] = email_advanced
             mod_email_advanced_sessions[session]["smtp"] = True
+            
             SetVar(result, True)
         except Exception as e:
             SetVar(result, False)
@@ -466,5 +472,6 @@ try:
             raise e
 
 except Exception as e:
-        PrintException()
-        raise e
+    traceback.print_exc()
+    PrintException()
+    raise e
