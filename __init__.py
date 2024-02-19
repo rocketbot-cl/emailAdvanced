@@ -11,19 +11,27 @@ try:
     from email.mime.base import MIMEBase
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
+    from email.header import Header
     import re
     import sys
+    import traceback
 
+
+    GetParams = GetParams # type: ignore
+    SetVar = SetVar # type: ignore
+    GetGlobals = GetGlobals # type: ignore
+    PrintException = PrintException # type: ignore
+    
     # Add the module's lib folder to the path
-    base_path = tmp_global_obj["basepath"]
+    base_path = tmp_global_obj["basepath"] # type: ignore
     cur_path = base_path + 'modules' + os.sep + 'emailAdvanced' + os.sep + 'libs' + os.sep
     if cur_path not in sys.path:
         sys.path.append(cur_path)
 
     # external libraries
-    import mailparser
-    from mailparser import mailparser
-    from mail_common import Mail
+    import mailparser # type: ignore
+    from mailparser import mailparser # type: ignore
+    from mail_common import Mail # type: ignore
     from bs4 import BeautifulSoup
     outenc = sys.stdout.encoding or sys.getfilesystemencoding()
 
@@ -58,7 +66,7 @@ global  mod_email_advanced_sessions
 SESSION_DEFAULT = "default"
 # Initialize settings for the module here
 try:
-    if not mod_email_advanced_sessions:
+    if not mod_email_advanced_sessions: # type: ignore
         mod_email_advanced_sessions = {SESSION_DEFAULT: {"email": GetGlobals('email'), "smtp": True, "imap": True}}
 except NameError:
     mod_email_advanced_sessions = {SESSION_DEFAULT: {"email": GetGlobals('email'), "smtp": True, "imap": True}}
@@ -66,7 +74,7 @@ except NameError:
 
 
 class EmailAdvanced(Mail):
-    def __init__(self, host, port, user, password, ssl, imap=False, smtp=False, timeout=99):
+    def __init__(self, host, port, user, password, ssl=False, imap=False, smtp=False, timeout=99):
         self.IMAP_SERVER = host if imap else None
         self.SMTP_SERVER = host if smtp else None
         self.SMTP_PORT = port if smtp else None
@@ -278,7 +286,7 @@ try:
 
         # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
         
-        if ssl:
+        if ssl == True:
             server = smtplib.SMTP_SSL(host, port)
         else:
             server = smtplib.SMTP(host, port)
@@ -289,20 +297,23 @@ try:
             except:
                 pass
             server.login(user, password)
-            
-
+        
+        if not cc:
+            cc = ""
+        
         msg = MIMEMultipart()
         msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
         msg['Subject'] = subject
 
+        to_ = to_.split(",")
         if cc:
-
-            toAddress = to_.split(",") + cc.split(",")
+            cc = cc.split(",")
+            toAddress = to_ + cc
         else:
-            toAddress = to_.split(",")
-
+            toAddress = to_
+        
         if not body_:
             body_ = ""
         body = body_.replace("\n", "<br/>")
@@ -321,7 +332,8 @@ try:
                     part.set_payload((attachment).read())
                     attachment.close()
                     encoders.encode_base64(part)
-                    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+                    header = Header(filename, 'utf-8')
+                    part.add_header('Content-Disposition', "attachment; filename= %s" % header.encode())
                     msg.attach(part)
 
         else:
@@ -333,7 +345,8 @@ try:
                     part.set_payload((attachment).read())
                     attachment.close()
                     encoders.encode_base64(part)
-                    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+                    header = Header(filename, 'utf-8')
+                    part.add_header('Content-Disposition', "attachment; filename= %s" % header.encode())
                     msg.attach(part)
 
         text = msg.as_string()
@@ -361,12 +374,13 @@ try:
             if user and pwd:
                 server.login(user, pwd)
             if "smtp" in session_global and session_global["smtp"]:
-                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, smtp=False)
-            email_advanced = mod_email_advanced_sessions[session]["email"]
-            email_advanced.IMAP_PORT = port
-            email_advanced.IMAP_SERVER = host
-            email_advanced.FROM_EMAIL = user
-            email_advanced.FROM_PWD = pwd
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=True, smtp=False)
+            else:
+                email_advanced = mod_email_advanced_sessions[session]["email"]
+                email_advanced.IMAP_PORT = port
+                email_advanced.IMAP_SERVER = host
+                email_advanced.FROM_EMAIL = user
+                email_advanced.FROM_PWD = pwd
             mod_email_advanced_sessions[session]["email"] = email_advanced
             mod_email_advanced_sessions[session]["imap"] = True
             SetVar(result, True)
@@ -388,7 +402,6 @@ try:
             port = int(port)
             if ssl:
                 server = smtplib.SMTP_SSL(host, port)
-        
             else:
                 server = smtplib.SMTP(host, port)
             try:
@@ -398,15 +411,17 @@ try:
             if user and pwd:
                 server.login(user, pwd)
             if "imap" in session_global and session_global["imap"]:
-                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=False)
-            email_advanced = mod_email_advanced_sessions[session]["email"]
-            email_advanced.FROM_EMAIL = user
-            email_advanced.FROM_PWD = pwd
+                email_advanced = EmailAdvanced(host, port, user, pwd, ssl, imap=False, smtp=True)
+            else:
+                email_advanced = mod_email_advanced_sessions[session]["email"]
+                email_advanced.FROM_EMAIL = user
+                email_advanced.FROM_PWD = pwd
 
-            email_advanced.SMTP_PORT = port
-            email_advanced.SMTP_SERVER = host
+                email_advanced.SMTP_PORT = port
+                email_advanced.SMTP_SERVER = host
             mod_email_advanced_sessions[session]["email"] = email_advanced
             mod_email_advanced_sessions[session]["smtp"] = True
+            
             SetVar(result, True)
         except Exception as e:
             SetVar(result, False)
@@ -414,8 +429,7 @@ try:
             raise e
         
     if module == "validate_email":
-        from validate_email import validate_email
-        import DNS
+        from validate_email import validate_email # type: ignore
         email = GetParams("email")
         result = GetParams("result")
         try:
@@ -454,7 +468,7 @@ try:
             imap_host = imap.IMAP_SERVER
             imap_port = imap.IMAP_PORT
             ssl_imap = imap.IMAP_SSL
-            from mail_common import Mail
+            from mail_common import Mail # type: ignore
             mail = Mail(user, password, 99,
                     smtp_host=smtp_host, smtp_port=smtp_port,
                     imap_host=imap_host, imap_port=imap_port)
@@ -466,5 +480,6 @@ try:
             raise e
 
 except Exception as e:
-        PrintException()
-        raise e
+    traceback.print_exc()
+    PrintException()
+    raise e
