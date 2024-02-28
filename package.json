@@ -15,7 +15,7 @@
     "docker": true,
     "type": "module",
     "name": "emailAdvanced",
-    "version": "3.4.0",
+    "version": "3.5.0",
     "title": {
         "es": "Email avanzado",
         "en": "Advanced email",
@@ -298,6 +298,107 @@
         },
         {
             "en": {
+                "title": "Get all emails",
+                "description": "This command allows you to get all emails from a folder with the option to filter",
+                "title_options": "Select Option",
+                "options": null
+            },
+            "es": {
+                "title": "Obtener todos los emails",
+                "description": "Este comando te permite obtener todos los emails de una carpeta con la opción de filtrar",
+                "title_options": "Select Option",
+                "options": null
+            },
+            "pr": {
+                "title": "Obter todos os emails",
+                "description": "Este comando permite obter todos os emails de uma pasta com a opção de filtrar",
+                "title_options": "Select Option",
+                "options": null
+            },
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "SUBJECT \"Test Rocketbot\"",
+                        "title": {
+                            "es": "Filtro",
+                            "en": "Filter",
+                            "pr": "Filtro"
+                        },
+                        "description": {
+                            "es": "Colocamos el filtro que deseamos aplicar",
+                            "en": "We put the filter that we want to apply",
+                            "pr": "Colocamos o filtro que queremos aplicar"
+                        },
+                        "help": {
+                            "es": "Opcional. Si no se coloca se obtendrán todos los emails de la carpeta seleccionada",
+                            "en": "Optional. If not placed, all emails from the selected folder will be obtained",
+                            "pr": "Opcional. Se não for colocado, todos os emails da pasta selecionada serão obtidos"
+                        },
+                        "id": "filter",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta de la que queremos obtener los emails",
+                            "en": "We put the folder from which we want to obtain the emails",
+                            "pr": "Colocamos a pasta da qual queremos obter os emails"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "variable",
+                        "title": {
+                            "es": "Asignar a variable",
+                            "en": "Set to variable",
+                            "pr": "Definir para variável"
+                        },
+                        "description": {
+                            "es": "Colocamos la variable donde queremos que se guarde la data",
+                            "en": "We put the variable where we want to save the data",
+                            "pr": "Colocamos a variável onde queremos salvar os dados"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    }
+                ]
+            },
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "getEmails",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
                 "title": "Read all data from email",
                 "description": "Read all data from email",
                 "title_options": "Select Option",
@@ -332,7 +433,31 @@
                             "pr": "Colocamos o ID do email para ler"
                         },
                         "id": "id_correo",
-                        "css": "col-md-6",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta de la que queremos obtener los emails",
+                            "en": "We put the folder from which we want to obtain the emails",
+                            "pr": "Colocamos a pasta da qual queremos obter os emails"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
                         "data_type": "str",
                         "default": null,
                         "required": true
@@ -352,7 +477,7 @@
                         },
                         "remove_vars": true,
                         "id": "result",
-                        "css": "col-md-6",
+                        "css": "col-md-4",
                         "data_type": "str",
                         "default": null,
                         "required": true

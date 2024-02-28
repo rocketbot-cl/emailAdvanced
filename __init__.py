@@ -160,6 +160,7 @@ try:
     if module == "LeerTodo":
 
         id_correo = GetParams('id_correo')
+        folder = GetParams('folder') or "inbox"
         result = GetParams('result')
         path_mail = GetParams('path_mail')
         path_attachment = GetParams('path_attachment')
@@ -178,7 +179,7 @@ try:
         
         if user and password:
             server.login(user, password)
-        server.select('inbox', readonly=False)
+        server.select(folder, readonly=False)
 
         if id_correo:
             rv, data = server.fetch(id_correo, '(RFC822)')
@@ -478,6 +479,49 @@ try:
         except Exception as e:
             PrintException()
             raise e
+
+    if module == "getEmails":
+        result_ = GetParams('result')
+        filter_ = GetParams('filter') or "ALL"
+        folder = GetParams('folder') or "inbox"
+        
+        imap = mod_email_advanced_sessions[session]["email"]
+        host = imap.IMAP_SERVER
+        port = imap.IMAP_PORT
+        ssl = imap.IMAP_SSL
+        user = imap.FROM_EMAIL
+        password = imap.FROM_PWD
+
+        if ssl:
+            server = imaplib.IMAP4_SSL(host, port)
+        else:
+            server = imaplib.IMAP4(host, port)
+        
+        if user and password:
+            server.login(user, password)
+        
+        print("logged in")
+        try:
+            server.select(folder)
+        except:
+            print("error selecting folder. Using default 'inbox'")
+            server.select("inbox")
+        search_ = filter_
+        result, data = server.search(None, search_)
+
+        print("result: ", result)
+        print("data: ", data)
+
+
+        ids = data[0]
+        id_list = ids.split()
+        server.close()
+
+
+
+        if result_:
+            SetVar(result_, [b.decode() for b in id_list])
+        
 
 except Exception as e:
     traceback.print_exc()
