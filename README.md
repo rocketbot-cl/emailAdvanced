@@ -1,16 +1,14 @@
-# Email avanzado
+# Advanced email
   
-Module with advanced options for mail management  
+Module with advanced options for handling emails  
 
-*Read this in other languages: [English](README.md), [Español](README.es.md).*
+*Read this in other languages: [English](README.md), [Português](README.pr.md), [Español](README.es.md)*
 
 ## How to install this module
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
-
-
-## How to use this module
-The emailAdvanced module must be used in conjunction with the native email module. As a first action, we must go to the modules section and look for the "Email" module, then "SMTP-IMAP" and use the "Configure server" command. We must complete the fields with the data of the server, port, password and mail. Check SSL if necessary. Once this is done, we will be able to use the module commands.
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
 
 
 ## Overview
@@ -20,28 +18,31 @@ The emailAdvanced module must be used in conjunction with the native email modul
 Command to send html format email, cc and multiple files
 
 2. Move email to folder  
-Módulos para mover emails de carpeta para servidores de correos IMAP
+This command allows you to move an email to another folder
 
-3. Read all data from email  
+3. Get all emails  
+This command allows you to get all emails from a folder with the option to filter
+
+4. Read all data from email  
 Read all data from email
 
-4. Mark mail as unread  
+5. Mark mail as unread  
 Mark mail as unread by ID
 
-5. List email folders  
+6. List email folders  
 List email folders
 
-6. Connect Imap  
+7. Connect Imap  
 User only if native command not working to read emails
 
-7. Connect SMTP  
+8. Connect SMTP  
 User only if native command not working connection
 
-8. Validate emails  
+9. Validate emails  
 Validate emails
 
-9. Forward email for ID  
-Forward email for ID  
+10. Forward email for ID  
+This command allows you to forward an email by ID  
 
 
 

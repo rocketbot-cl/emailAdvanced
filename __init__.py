@@ -386,6 +386,8 @@ try:
             mod_email_advanced_sessions[session]["imap"] = True
             SetVar(result, True)
         except Exception as e:
+            if "login failed" in str(e).lower():
+                raise Exception("Login failed. If you are using Office 365 or Outlook, Please note that IMAP connections have been disabled.")
             SetVar(result, False)
             PrintException()
             raise e
