@@ -15,7 +15,7 @@
     "docker": true,
     "type": "module",
     "name": "emailAdvanced",
-    "version": "3.5.0",
+    "version": "3.5.1",
     "title": {
         "es": "Email avanzado",
         "en": "Advanced email",
@@ -93,6 +93,31 @@
                         "data_type": "str",
                         "default": null,
                         "required": false
+                    },
+                    {
+                      "type": "input",
+                      "placeholder": {
+                        "es": "bcc@mail.com, bcc2@mail.com",
+                        "en": "bcc@mail.com, bcc2@mail.com",
+                        "pr": "bcc@mail.com, bcc2@mail.com"
+                      },
+                      "title": {
+                        "es": "Copia Oculta:",
+                        "en": "Bcc:",
+                        "pr": "Bcc:"
+                      },
+                      "help": {
+                        "es": "Para varios destinatarios separar por coma",
+                        "en": "For multiple recipients, comma separated",
+                        "pr": "Para vários destinatários, separados por vírgulas"
+                      },
+                      "description": {
+                        "es": "Seleccionar para enviar una copia oculta",
+                        "en": "Select to send a hidden copy",
+                        "pr": "Selecione para enviar uma cópia oculta"
+                      },
+                      "id": "bcc",
+                      "css": "col-md-12"
                     },
                     {
                         "type": "input",

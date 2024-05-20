@@ -275,6 +275,7 @@ try:
         subject = GetParams("subject")
         body_ = GetParams("msg")
         cc = GetParams('cc')
+        bcc = GetParams('bcc')
         attached_file = GetParams('path')
         files = GetParams('folder')
         filenames = []
@@ -301,19 +302,18 @@ try:
         
         if not cc:
             cc = ""
-        
+        if not bcc:
+            bcc = ""
         msg = MIMEMultipart()
         msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
         msg['Subject'] = subject
 
-        to_ = to_.split(",")
-        if cc:
-            cc = cc.split(",")
-            toAddress = to_ + cc
-        else:
-            toAddress = to_
+        def split_emails(emails):
+            return emails.split(",") if emails else []
+        
+        toAddress= split_emails(to_) + split_emails(cc)
         
         if not body_:
             body_ = ""
@@ -350,8 +350,14 @@ try:
                     part.add_header('Content-Disposition', "attachment; filename= %s" % header.encode())
                     msg.attach(part)
 
-        text = msg.as_string()
-        server.sendmail(user, toAddress, text)
+        if toAddress:
+            text = msg.as_string()
+            server.sendmail(user, toAddress, text)
+        if bcc:
+            msg['Bcc'] = bcc
+            text = msg.as_string()
+            toAddress= split_emails(bcc)
+            server.sendmail(user, toAddress, text)
         # server.close()
 
 
