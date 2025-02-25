@@ -1,48 +1,52 @@
-# Advanced email
+
+
+
+
+# Email avanzado
   
-Module with advanced options for handling emails  
+Módulo con opciones avanzadas para el manejo de correos  
 
 *Read this in other languages: [English](README.md), [Português](README.pr.md), [Español](README.es.md)*
 
-## How to install this module
+## Como instalar este módulo
   
-To install the module in Rocketbot Studio, it can be done in two ways:
-1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
-2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
+Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
+1. Manual: __Descargar__ el archivo .zip y descomprimirlo en la carpeta modules. El nombre de la carpeta debe ser el mismo al del módulo y dentro debe tener los siguientes archivos y carpetas: \__init__.py, package.json, docs, example y libs. Si tiene abierta la aplicación, refresca el navegador para poder utilizar el nuevo modulo.
+2. Automática: Al ingresar a Rocketbot Studio sobre el margen derecho encontrara la sección de **Addons**, seleccionar **Install Mods**, buscar el modulo deseado y presionar install.  
 
 
 ## Overview
 
 
-1. Send advanced email  
-Command to send html format email, cc and multiple files
+1. Enviar email avanzado  
+Comando para enviar email con formato html, cc y multiples archivos
 
-2. Move email to folder  
-This command allows you to move an email to another folder
+2. Mover email de carpeta  
+Este comando te permite mover un email a otra carpeta
 
-3. Get all emails  
-This command allows you to get all emails from a folder with the option to filter
+3. Obtener todos los emails  
+Este comando te permite obtener todos los emails de una carpeta con la opción de filtrar
 
-4. Read all data from email  
-Read all data from email
+4. Leer toda la data de un email  
+Puedes leer toda la data de un email
 
-5. Mark mail as unread  
-Mark mail as unread by ID
+5. Marcar email como no leído  
+Marcar email como no leído
 
-6. List email folders  
-List email folders
+6. Listar carpetas  
+Lista carpetas del servidor de correos
 
-7. Connect Imap  
-User only if native command not working to read emails
+7. Conexión Imap  
+Usar solo si el comando nativo no permite leer mails
 
-8. Connect SMTP  
-User only if native command not working connection
+8. Conexión SMTP  
+Usar solo si el comando nativo no permite la conexión
 
-9. Validate emails  
-Validate emails
+9. Validar email  
+Valida un email
 
-10. Forward email for ID  
-This command allows you to forward an email by ID  
+10. Reenviar email por ID  
+Este comando permite reenviar un email por ID  
 
 
 

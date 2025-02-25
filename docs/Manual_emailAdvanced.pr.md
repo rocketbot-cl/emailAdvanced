@@ -1,10 +1,14 @@
+
+
+
+
 # Email avançado
   
 Módulo com opções avançadas para manipulação de emails  
 
 *Read this in other languages: [English](Manual_emailAdvanced.md), [Português](Manual_emailAdvanced.pr.md), [Español](Manual_emailAdvanced.es.md)*
   
-![banner](imgs/Banner_emailAdvanced.png o jpg)
+![banner](imgs/Banner_emailAdvanced.png)
 ## Como instalar este módulo
   
 Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
@@ -21,6 +25,7 @@ Comando para enviar email com formato html, cc e múltiplos arquivos
 | --- | --- | --- |
 |Para|Aqui colocamos o destinatários para quem queremos enviar um email|user@email.com,person@mail.net|
 |Cc|Aqui colocamos o destinatários para quem queremos enviar uma cópia do email|cc@email.com,cc2@mail.net|
+|Bcc|Selecione para enviar uma cópia oculta|bcc@mail.com, bcc2@mail.com|
 |Assunto|Aqui colocamos o assunto do email|Check out this Rocketbot message|
 |Mensagem|Aqui colocamos a mensagem que queremos enviar|Hi person. This message was sent from Rocketbot. Bye|
 |Anexo|Aqui colocamos o os arquivos anexados|path/to/file.ext|
@@ -62,6 +67,7 @@ Marcar email como não lido
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |ID do email|Colocamos o ID do email para marcar como não lido|ID|
+|Pasta|Colocamos a pasta onde se encontra o email|inbox|
 
 ### Listar pastas
   
@@ -108,5 +114,6 @@ Este comando permite reenviar um email por ID
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |ID do Email|ID do email para reenviar|355|
+|Pasta|Colocamos a pasta onde se encontra o email|inbox|
 |Email|Email que receberá o email|test@email.com|
 |Assunto|Assunto do email|Subject|

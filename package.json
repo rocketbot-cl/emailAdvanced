@@ -15,7 +15,7 @@
     "docker": true,
     "type": "module",
     "name": "emailAdvanced",
-    "version": "3.5.1",
+    "version": "3.5.3",
     "title": {
         "es": "Email avanzado",
         "en": "Advanced email",
@@ -600,6 +600,30 @@
                         "data_type": "str",
                         "default": null,
                         "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta donde se encuentra el email",
+                            "en": "We put the folder where the email is located",
+                            "pr": "Colocamos a pasta onde se encontra o email"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
                     }
                 ]
             },
@@ -1083,6 +1107,30 @@
                         },
                         "id": "id_",
                         "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta donde se encuentra el email",
+                            "en": "We put the folder where the email is located",
+                            "pr": "Colocamos a pasta onde se encontra o email"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
                         "data_type": "str",
                         "default": null,
                         "required": true

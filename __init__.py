@@ -236,14 +236,14 @@ try:
     if module == "MarkUnread":
         imap = mod_email_advanced_sessions[session]["email"]
         id_correo = GetParams('id_correo')
-
+        folder = GetParams('folder') or imap.EMAIL_FOLDER
    
         if imap.IMAP_SSL:
             imap.server_imap = imaplib.IMAP4_SSL(imap.IMAP_SERVER, imap.IMAP_PORT)
         else:
             imap.server_imap = imaplib.IMAP4(imap.IMAP_SERVER, imap.IMAP_PORT)
         imap.server_imap.login(imap.FROM_EMAIL, imap.FROM_PWD)
-        imap.server_imap.select(imap.EMAIL_FOLDER, readonly=False)
+        imap.server_imap.select(folder, readonly=False)
         imap.server_imap.store(id_correo, '-FLAGS', '(\Seen)')
         imap.server_imap.close()
         imap.server_imap.logout()
@@ -458,6 +458,7 @@ try:
         to_ = GetParams('email')
         result_ = GetParams('result')
         subject = GetParams('subject')
+        folder = GetParams('folder') or "inbox"
         try:
             email_advanced = mod_email_advanced_sessions[session]["email"]
             
@@ -482,7 +483,7 @@ try:
                     smtp_host=smtp_host, smtp_port=smtp_port,
                     imap_host=imap_host, imap_port=imap_port)
 
-            mail.forward_email(id_, "inbox", temp_folder, to_, subject)
+            mail.forward_email(id_, folder, temp_folder, to_, subject)
             rmtree(temp_folder)
         except Exception as e:
             PrintException()
