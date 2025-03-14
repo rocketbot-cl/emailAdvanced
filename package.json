@@ -1,811 +1,1197 @@
 {
-  "author": "José González - Danilo Toro - Rocketbot",
-  "description": "Módulo con opciones avanzadas para el manejo de correos",
-  "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "license": "MIT",
-  "homepage": "http://rocketbot.cl",
-  "linux": true,
-  "windows": true,
-  "mac": true,
-  "docker": true,
-  "type": "module",
-  "name": "emailAdvanced",
-  "version": "3.2.2",
-  "title": {
-    "en": "Email avanzado",
-    "es": "Email avanzado",
-    "cn": "Email avanzado"
-  },
-  "dependencies": {},
-  "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-  "children": [
-    {
-      "en": {
-        "title": "Send advanced email",
-        "description": "Command to send html format email, cc and multiple files",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Enviar email avanzado",
-        "description": "Comando para enviar email con formato html, cc y multiples archivos",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "user@email.com,person@mail.net",
-            "title": {
-              "es": "Para",
-              "en": "To"
-            },
-            "help": {
-              "es": "para varios destinatarios separar por coma",
-              "en": "for multiple recipients, comma separated"
-            },
-            "description": {
-              "es": "Aqui colocamos el o los destinatarios a los que deseamos enviar un mail",
-              "en": "Here we put the recipients to whom we want to send an email"
-            },
-            "id": "to",
-            "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "cc@email.com,cc2@mail.net",
-            "title": {
-              "es": "Cc:",
-              "en": "Cc:"
-            },
-            "help": {
-              "es": "para varios destinatarios separar por coma",
-              "en": "for multiple recipients, comma separated"
-            },
-            "description": {
-              "es": "Aqui colocamos el o los destinatarios a los que deseamos enviar un mail",
-              "en": "Here we put the recipients to whom we want to send an email"
-            },
-            "id": "cc",
-            "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "Check out this Rocketbot message",
-            "title": {
-              "es": "Asunto",
-              "en": "Subject"
-            },
-            "description": {
-              "es": "Aqui colocamos el asunto del mail",
-              "en": "Here we put the subject of the email"
-            },
-            "id": "subject",
-            "css": "col-md-12"
-          },
-          {
-            "type": "textarea",
-            "placeholder": "Hi person. This message was sent from Rocketbot. Bye",
-            "title": {
-              "es": "Mensaje",
-              "en": "Message"
-            },
-            "description": {
-              "es": "Aqui colocamos el mensaje que deseamos enviar",
-              "en": "Here we put the message that we want to send"
-            },
-            "id": "msg",
-            "css": "col-md-12"
-          },
-          {
-            "type": "file_select",
-            "placeholder": "path/to/file.ext",
-            "title": {
-              "es": "Adjunto",
-              "en": "Attachment"
-            },
-            "description": {
-              "es": "Aqui colocamos el o los archivos adjuntos",
-              "en": "Here we put the files that we want to attach"
-            },
-            "id": "path",
-            "css": "col-md-12"
-          },
-          {
-            "type": "folder_select",
-            "placeholder": "path/to/folder",
-            "title": {
-              "es": "Adjuntar multiples archivos",
-              "en": "attach multiple files"
-            },
-            "description": {
-              "es": "Aqui colocamos el o los archivos adjuntos",
-              "en": "Here we put the files that we want to attach"
-            },
-            "id": "folder",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "sendEmail",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts"
+    "author": "José González - Danilo Toro - Rocketbot",
+    "description": "Módulo con opciones avanzadas para el manejo de correos",
+    "description_lang": {
+        "es": "Módulo con opciones avanzadas para el manejo de correos",
+        "en": "Module with advanced options for handling emails",
+        "pr": "Módulo com opções avançadas para manipulação de emails"
     },
-    {
-      "en": {
-        "title": "Move email to folder",
-        "description": "Módulos para mover emails de carpeta para servidores de correos IMAP",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Mover Email de carpeta",
-        "description": "Módulos para mover emails de carpeta para servidores de correos IMAP",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "cn": {
-        "title": "Mover Email de carpeta",
-        "description": "Módulos para mover emails de carpeta para servidores de correos IMAP",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "ID mail",
-            "title": {
-              "es": "ID de mail",
-              "en": "ID de mail",
-              "cn": "ID de mail"
-            },
-            "description": {
-              "es": "Colocamos el ID del mail a mover",
-              "en": "We put the ID of mail to move"
-            },
-            "id": "id_",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "Carpeta origen",
-            "title": {
-              "es": "Carpeta origen",
-              "en": "Origin folder",
-              "cn": "ID de mail"
-            },
-            "help": {
-              "es": "Si deja vacío se moverá desde INBOX",
-              "en": "If left empty it will move from INBOX"
-            },
-            "description": {
-              "es": "Colocamos la carpeta origen",
-              "en": "We put the origin folder"
-            },
-            "id": "from_",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "carpeta",
-            "title": {
-              "es": "Carpeta de destino",
-              "en": "Carpeta de destino",
-              "cn": "Carpeta de destino"
-            },
-            "description": {
-              "es": "Colocamos la carpeta de destino",
-              "en": "We put the destination folder"
-            },
-            "id": "folder",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "variable",
-            "title": {
-              "es": "Asignar a variable",
-              "en": "Asignar a variable",
-              "cn": "Asignar a variable"
-            },
-            "description": {
-              "es": "Colocamos la variable a la que se asignará el resultado",
-              "en": "We put the variable to which the result will be assigned"
-            },
-            "remove_vars": true,
-            "id": "var",
-            "css": "col-md-6"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "MoveMail",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts"
+    "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
+    "license": "MIT",
+    "homepage": "http://rocketbot.com",
+    "linux": true,
+    "windows": true,
+    "mac": true,
+    "docker": true,
+    "type": "module",
+    "name": "emailAdvanced",
+    "version": "3.5.3",
+    "title": {
+        "es": "Email avanzado",
+        "en": "Advanced email",
+        "pr": "Email avançado"
     },
-    {
-      "en": {
-        "title": "Read all data from email",
-        "description": "Read all data from email",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Leer toda la data de un email",
-        "description": "Puedes leer toda la data de un email",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "cn": {
-        "title": "Leer emails nuevos",
-        "description": "Módulos para mover emails de carpeta para servidores de correos IMAP",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "ID",
-            "title": {
-              "es": "ID de mail",
-              "en": "ID de mail",
-              "cn": "ID de mail"
+    "dependencies": {},
+    "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+    "children": [
+        {
+            "en": {
+                "title": "Send advanced email",
+                "description": "Command to send html format email, cc and multiple files",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos el ID del mail a leer",
-              "en": "We put the ID of the mail to read"
+            "es": {
+                "title": "Enviar email avanzado",
+                "description": "Comando para enviar email con formato html, cc y multiples archivos",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "id_correo",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "variable",
-            "title": {
-              "es": "Asignar a variable",
-              "en": "Asignar a variable",
-              "cn": "Asignar a variable"
+            "pr": {
+                "title": "Enviar email avançado",
+                "description": "Comando para enviar email com formato html, cc e múltiplos arquivos",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos la variable donde queremos que se guarde la data",
-              "en": "We put the variable where we want to save the data"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "user@email.com,person@mail.net",
+                        "title": {
+                            "es": "Para",
+                            "en": "To",
+                            "pr": "Para"
+                        },
+                        "help": {
+                            "es": "para varios destinatarios separar por coma",
+                            "en": "for multiple recipients, comma separated",
+                            "pr": "para vários destinatários separar por vírgula"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el o los destinatarios a los que deseamos enviar un mail",
+                            "en": "Here we put the recipients to whom we want to send an email",
+                            "pr": "Aqui colocamos o destinatários para quem queremos enviar um email"
+                        },
+                        "id": "to",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "cc@email.com,cc2@mail.net",
+                        "title": {
+                            "es": "Cc:",
+                            "en": "Cc:",
+                            "pr": "Cc:"
+                        },
+                        "help": {
+                            "es": "para varios destinatarios separar por coma",
+                            "en": "for multiple recipients, comma separated",
+                            "pr": "para vários destinatários separar por vírgula"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el o los destinatarios a los que deseamos enviar una copia del mail",
+                            "en": "Here we put the recipients to whom we want to send a copy of the email",
+                            "pr": "Aqui colocamos o destinatários para quem queremos enviar uma cópia do email"
+                        },
+                        "id": "cc",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    },
+                    {
+                      "type": "input",
+                      "placeholder": {
+                        "es": "bcc@mail.com, bcc2@mail.com",
+                        "en": "bcc@mail.com, bcc2@mail.com",
+                        "pr": "bcc@mail.com, bcc2@mail.com"
+                      },
+                      "title": {
+                        "es": "Copia Oculta:",
+                        "en": "Bcc:",
+                        "pr": "Bcc:"
+                      },
+                      "help": {
+                        "es": "Para varios destinatarios separar por coma",
+                        "en": "For multiple recipients, comma separated",
+                        "pr": "Para vários destinatários, separados por vírgulas"
+                      },
+                      "description": {
+                        "es": "Seleccionar para enviar una copia oculta",
+                        "en": "Select to send a hidden copy",
+                        "pr": "Selecione para enviar uma cópia oculta"
+                      },
+                      "id": "bcc",
+                      "css": "col-md-12"
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "Check out this Rocketbot message",
+                        "title": {
+                            "es": "Asunto",
+                            "en": "Subject",
+                            "pr": "Assunto"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el asunto del mail",
+                            "en": "Here we put the subject of the email",
+                            "pr": "Aqui colocamos o assunto do email"
+                        },
+                        "id": "subject",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "textarea",
+                        "placeholder": "Hi person. This message was sent from Rocketbot. Bye",
+                        "title": {
+                            "es": "Mensaje",
+                            "en": "Message",
+                            "pr": "Mensagem"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el mensaje que deseamos enviar",
+                            "en": "Here we put the message that we want to send",
+                            "pr": "Aqui colocamos a mensagem que queremos enviar"
+                        },
+                        "id": "msg",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    },
+                    {
+                        "type": "file_select",
+                        "placeholder": "path/to/file.ext",
+                        "title": {
+                            "es": "Adjunto",
+                            "en": "Attachment",
+                            "pr": "Anexo"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el o los archivos adjuntos",
+                            "en": "Here we put the files that we want to attach",
+                            "pr": "Aqui colocamos o os arquivos anexados"
+                        },
+                        "id": "path",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    },
+                    {
+                        "type": "folder_select",
+                        "placeholder": "path/to/folder",
+                        "title": {
+                            "es": "Adjuntar multiples archivos",
+                            "en": "attach multiple files",
+                            "pr": "anexar múltiplos arquivos"
+                        },
+                        "description": {
+                            "es": "Aqui colocamos el o los archivos adjuntos",
+                            "en": "Here we put the files that we want to attach",
+                            "pr": "Aqui colocamos o os arquivos anexados"
+                        },
+                        "id": "folder",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "remove_vars": true,
-            "id": "result",
-            "css": "col-md-6"
-          },
-          {
-            "type": "folder_select",
-            "placeholder": "C:/Users/User/Desktop",
-            "title": {
-              "es": "Ruta guardar email",
-              "en": "Email save path",
-              "cn": "ID de mail"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "sendEmail",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "Move email to folder",
+                "description": "This command allows you to move an email to another folder",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos la ruta donde queremos que se guarde el mail",
-              "en": "We put the path where we want to save the mail"
+            "es": {
+                "title": "Mover email de carpeta",
+                "description": "Este comando te permite mover un email a otra carpeta",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "path_mail",
-            "css": "col-md-12"
-          },
-          {
-            "type": "folder_select",
-            "placeholder": "C:/Users/User/Desktop",
-            "title": {
-              "es": "Ruta donde se descargaran los adjuntos",
-              "en": "Attachment save path",
-              "cn": "ID de mail"
+            "pr": {
+                "title": "Mover email de pasta",
+                "description": "Este comando permite mover um email para outra pasta",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos la ruta donde queremos que se guarden los adjuntos",
-              "en": "We put the path where we want to save the attachments"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "ID mail",
+                        "title": {
+                            "es": "ID de mail",
+                            "en": "Email ID",
+                            "pr": "ID do email"
+                        },
+                        "description": {
+                            "es": "ID del mail a mover",
+                            "en": "ID of the mail to move",
+                            "pr": "ID do email para mover"
+                        },
+                        "id": "id_",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "Carpeta origen",
+                        "title": {
+                            "es": "Carpeta origen",
+                            "en": "Origin folder",
+                            "pr": "Pasta de origem"
+                        },
+                        "help": {
+                            "es": "Si deja vacío se moverá desde INBOX",
+                            "en": "If left empty it will move from INBOX",
+                            "pr": "Se deixado em branco, será movido de INBOX"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta origen",
+                            "en": "We put the origin folder",
+                            "pr": "Colocamos a pasta de origem"
+                        },
+                        "id": "from_",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "carpeta",
+                        "title": {
+                            "es": "Carpeta de destino",
+                            "en": "Destination folder",
+                            "pr": "Pasta de destino"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta de destino",
+                            "en": "We put the destination folder",
+                            "pr": "Colocamos a pasta de destino"
+                        },
+                        "id": "folder",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "variable",
+                        "title": {
+                            "es": "Asignar a variable",
+                            "en": "Set to variable",
+                            "pr": "Definir para variável"
+                        },
+                        "description": {
+                            "es": "Colocamos la variable a la que se asignará el resultado",
+                            "en": "We put the variable to which the result will be assigned",
+                            "pr": "Colocamos a variável à qual o resultado será atribuído"
+                        },
+                        "remove_vars": true,
+                        "id": "var",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "id": "path_attachment",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "LeerTodo",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts"
-    },
-    {
-      "en": {
-        "title": "Mark mail as unread",
-        "description": "Mark mail as unread by ID",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Marcar email como no leído",
-        "description": "Marcar email como no leído",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": {
-              "es": "ID",
-              "en": "ID",
-              "cn": "ID"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "MoveMail",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "Get all emails",
+                "description": "This command allows you to get all emails from a folder with the option to filter",
+                "title_options": "Select Option",
+                "options": null
             },
-            "title": {
-              "es": "ID de mail",
-              "en": "ID de mail",
-              "cn": "ID de mail"
+            "es": {
+                "title": "Obtener todos los emails",
+                "description": "Este comando te permite obtener todos los emails de una carpeta con la opción de filtrar",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos el ID del mail para marcar como no leido",
-              "en": "We put the ID of the mail to mark as unread."
+            "pr": {
+                "title": "Obter todos os emails",
+                "description": "Este comando permite obter todos os emails de uma pasta com a opção de filtrar",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "id_correo",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "MarkUnread",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts"
-    },
-    {
-      "en": {
-        "title": "List email folders",
-        "description": "List email folders",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Listar carpetas",
-        "description": "Lista carpetas del servidor de correos",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": {
-              "es": "Variable",
-              "en": "Variable"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "SUBJECT \"Test Rocketbot\"",
+                        "title": {
+                            "es": "Filtro",
+                            "en": "Filter",
+                            "pr": "Filtro"
+                        },
+                        "description": {
+                            "es": "Colocamos el filtro que deseamos aplicar",
+                            "en": "We put the filter that we want to apply",
+                            "pr": "Colocamos o filtro que queremos aplicar"
+                        },
+                        "help": {
+                            "es": "Opcional. Si no se coloca se obtendrán todos los emails de la carpeta seleccionada",
+                            "en": "Optional. If not placed, all emails from the selected folder will be obtained",
+                            "pr": "Opcional. Se não for colocado, todos os emails da pasta selecionada serão obtidos"
+                        },
+                        "id": "filter",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta de la que queremos obtener los emails",
+                            "en": "We put the folder from which we want to obtain the emails",
+                            "pr": "Colocamos a pasta da qual queremos obter os emails"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "variable",
+                        "title": {
+                            "es": "Asignar a variable",
+                            "en": "Set to variable",
+                            "pr": "Definir para variável"
+                        },
+                        "description": {
+                            "es": "Colocamos la variable donde queremos que se guarde la data",
+                            "en": "We put the variable where we want to save the data",
+                            "pr": "Colocamos a variável onde queremos salvar os dados"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    }
+                ]
             },
-            "title": {
-              "es": "Asignar a variable",
-              "en": "Set to var"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "getEmails",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "Read all data from email",
+                "description": "Read all data from email",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos la variable donde queremos que se guarde el resultado",
-              "en": "We put the variable where we want to save the result."
+            "es": {
+                "title": "Leer toda la data de un email",
+                "description": "Puedes leer toda la data de un email",
+                "title_options": "Select Option",
+                "options": null
             },
-            "remove_vars": true,
-            "id": "result",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "ListFolder",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts"
-    },
-    {
-      "en": {
-        "title": "Connect Imap",
-        "description": "User only if native command not working to read emails",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Conexión Imap",
-        "description": "Usar solo si el comando nativo no permite leer mails",
-        "title_options": "Seleccione una opción",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "user@example.com",
-            "title": {
-              "es": "User:",
-              "en": "Usuario:",
-              "cn": "User:"
+            "pr": {
+                "title": "Leia todos os dados do email",
+                "description": "Você pode ler todos os dados de um email",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Usuario de la cuenta de correo",
-              "en": "Usuario de la cuenta de correo",
-              "cn": "User of the email account"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "ID",
+                        "title": {
+                            "es": "ID de mail",
+                            "en": "Email ID",
+                            "pr": "ID do email"
+                        },
+                        "description": {
+                            "es": "Colocamos el ID del mail a leer",
+                            "en": "We put the ID of the mail to read",
+                            "pr": "Colocamos o ID do email para ler"
+                        },
+                        "id": "id_correo",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta de la que queremos obtener los emails",
+                            "en": "We put the folder from which we want to obtain the emails",
+                            "pr": "Colocamos a pasta da qual queremos obter os emails"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "variable",
+                        "title": {
+                            "es": "Asignar a variable",
+                            "en": "Set to variable",
+                            "pr": "Definir para variável"
+                        },
+                        "description": {
+                            "es": "Colocamos la variable donde queremos que se guarde la data",
+                            "en": "We put the variable where we want to save the data",
+                            "pr": "Colocamos a variável onde queremos salvar os dados"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "folder_select",
+                        "placeholder": "C:/Users/User/Desktop",
+                        "title": {
+                            "es": "Ruta guardar email",
+                            "en": "Email save path",
+                            "pr": "Caminho de salvamento do email"
+                        },
+                        "description": {
+                            "es": "Colocamos la ruta donde queremos que se guarde el mail",
+                            "en": "We put the path where we want to save the mail",
+                            "pr": "Colocamos o caminho onde queremos salvar o email"
+                        },
+                        "id": "path_mail",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    },
+                    {
+                        "type": "folder_select",
+                        "placeholder": "C:/Users/User/Desktop",
+                        "title": {
+                            "es": "Ruta donde se descargaran los adjuntos",
+                            "en": "Attachment save path",
+                            "pr": "Caminho de salvamento do anexo"
+                        },
+                        "description": {
+                            "es": "Colocamos la ruta donde queremos que se guarden los adjuntos",
+                            "en": "We put the path where we want to save the attachments",
+                            "pr": "Colocamos o caminho onde queremos salvar os anexos"
+                        },
+                        "id": "path_attachment",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "id": "user",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "******",
-            "title": {
-              "es": "Contraseña:",
-              "en": "Password:",
-              "cn": "Password:"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "LeerTodo",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "Mark mail as unread",
+                "description": "Mark mail as unread by ID",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Contraseña de la cuenta de correo",
-              "en": "Password of the email account",
-              "cn": "Password of the email account"
+            "es": {
+                "title": "Marcar email como no leído",
+                "description": "Marcar email como no leído",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "pass",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "host.imap.xys",
-            "title": {
-              "es": "Servidor:",
-              "en": "Server:"
+            "pr": {
+                "title": "Marcar email como não lido",
+                "description": "Marcar email como não lido",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Servidor de correo",
-              "en": "Email server",
-              "cn": "Email server"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": {
+                            "es": "ID",
+                            "en": "ID",
+                            "pr": "ID"
+                        },
+                        "title": {
+                            "es": "ID de mail",
+                            "en": "Email ID",
+                            "pr": "ID do email"
+                        },
+                        "description": {
+                            "es": "Colocamos el ID del mail para marcar como no leido",
+                            "en": "We put the ID of the mail to mark as unread.",
+                            "pr": "Colocamos o ID do email para marcar como não lido"
+                        },
+                        "id": "id_correo",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta donde se encuentra el email",
+                            "en": "We put the folder where the email is located",
+                            "pr": "Colocamos a pasta onde se encontra o email"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    }
+                ]
             },
-            "id": "host",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "517",
-            "title": {
-              "es": "Puerto:",
-              "en": "Port:"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "MarkUnread",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "List email folders",
+                "description": "List email folders",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Puerto de conexión",
-              "en": "Connection port",
-              "cn": "Connection port"
+            "es": {
+                "title": "Listar carpetas",
+                "description": "Lista carpetas del servidor de correos",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "port",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "Variable",
-            "title": {
-              "es": "Asignar resultado a variable:",
-              "en": "Assign result to a Variable:"
+            "pr": {
+                "title": "Listar pastas",
+                "description": "Lista pastas do servidor de emails",
+                "title_options": "Select Option",
+                "options": null
             },
-            "description": {
-              "es": "Variable donde se guardará el resultado",
-              "en": "Variable where the result will be stored",
-              "cn": "Variable where the result will be stored"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": {
+                            "es": "Variable",
+                            "en": "Variable",
+                            "pr": "Variável"
+                        },
+                        "title": {
+                            "es": "Asignar a variable",
+                            "en": "Set to var",
+                            "pr": "Definir para variável"
+                        },
+                        "description": {
+                            "es": "Colocamos la variable donde queremos que se guarde el resultado",
+                            "en": "We put the variable where we want to save the result.",
+                            "pr": "Colocamos a variável onde queremos salvar o resultado"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    }
+                ]
             },
-            "remove_vars": true,
-            "id": "result",
-            "css": "col-md-6"
-          },
-          {
-            "type": "checkbox",
-            "placeholder": {
-              "es": "True",
-              "en": "True"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "ListFolder",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts"
+        },
+        {
+            "en": {
+                "title": "Connect Imap",
+                "description": "User only if native command not working to read emails",
+                "title_options": "Select Option",
+                "options": null
             },
-            "title": {
-              "es": "Conexión SSL",
-              "en": "SSL Conection "
+            "es": {
+                "title": "Conexión Imap",
+                "description": "Usar solo si el comando nativo no permite leer mails",
+                "title_options": "Seleccione una opción",
+                "options": null
             },
-            "description": {
-              "es": "Conectar con SSL",
-              "en": "Connect with SSL",
-              "cn": "Connect with SSL"
+            "pr": {
+                "title": "Conectar Imap",
+                "description": "Usar apenas se o comando nativo não permitir ler emails",
+                "title_options": "Selecione uma opção",
+                "options": null
             },
-            "id": "ssl",
-            "css": "col-md-6"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "ConnectImap",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts",
-      "linux": true,
-      "windows": true,
-      "mac": true,
-      "docker": true
-    },
-    {
-      "en": {
-        "title": "Connect SMTP",
-        "description": "User only if native command not working connection",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Conexión SMTP",
-        "description": "Usar solo si el comando nativo no permite la conexión",
-        "title_options": "Seleccione una opción",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "user@example.com",
-            "title": {
-              "es": "User:",
-              "en": "Usuario:",
-              "cn": "User:"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "user@example.com",
+                        "title": {
+                            "es": "Usuario:",
+                            "en": "User:",
+                            "pr": "Usuário:"
+                        },
+                        "description": {
+                            "es": "Usuario de la cuenta de correo",
+                            "en": "User of the email account",
+                            "pr": "Usuário da conta de email"
+                        },
+                        "id": "user",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "******",
+                        "title": {
+                            "es": "Contraseña:",
+                            "en": "Password:",
+                            "pr": "Senha:"
+                        },
+                        "description": {
+                            "es": "Contraseña de la cuenta de correo o clave de aplicación",
+                            "en": "Password of the email account or application key",
+                            "pr": "Senha da conta de email ou chave de aplicação"
+                        },
+                        "id": "pass",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "host.imap.xys",
+                        "title": {
+                            "es": "Servidor:",
+                            "en": "Server:",
+                            "pr": "Servidor:"
+                        },
+                        "description": {
+                            "es": "Servidor de correo",
+                            "en": "Email server",
+                            "pr": "Servidor de email"
+                        },
+                        "id": "host",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "517",
+                        "title": {
+                            "es": "Puerto:",
+                            "en": "Port:",
+                            "pr": "Porta:"
+                        },
+                        "description": {
+                            "es": "Puerto de conexión",
+                            "en": "Connection port",
+                            "pr": "Porta de conexão"
+                        },
+                        "id": "port",
+                        "css": "col-md-6",
+                        "data_type": "int",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "Variable",
+                        "title": {
+                            "es": "Asignar resultado a variable:",
+                            "en": "Assign result to a Variable:",
+                            "pr": "Atribuir resultado a uma variável:"
+                        },
+                        "description": {
+                            "es": "Variable donde se guardará el resultado de la conexión",
+                            "en": "Variable where the result of the connection will be saved",
+                            "pr": "Variável onde o resultado da conexão será salvo"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "checkbox",
+                        "placeholder": "True",
+                        "title": {
+                            "es": "Conexión SSL",
+                            "en": "SSL Conection",
+                            "pr": "Conexão SSL"
+                        },
+                        "description": {
+                            "es": "Conectar con SSL",
+                            "en": "Connect with SSL",
+                            "pr": "Conectar com SSL"
+                        },
+                        "id": "ssl",
+                        "css": "col-md-6",
+                        "data_type": "bool",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "description": {
-              "es": "Colocamos el mail con el cual nos conectaremos",
-              "en": "Enter the e-mail with which we will connect to the server"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "ConnectImap",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts",
+            "linux": true,
+            "windows": true,
+            "mac": true,
+            "docker": true
+        },
+        {
+            "en": {
+                "title": "Connect SMTP",
+                "description": "User only if native command not working connection",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "user",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "******",
-            "title": {
-              "es": "Contraseña:",
-              "en": "Password:",
-              "cn": "Password:"
+            "es": {
+                "title": "Conexión SMTP",
+                "description": "Usar solo si el comando nativo no permite la conexión",
+                "title_options": "Seleccione una opción",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos la contraseña con la que nos conectaremos",
-              "en": "Enter the password with which we will connect to the server"
+            "pr": {
+                "title": "Conectar SMTP",
+                "description": "Usar apenas se o comando nativo não permitir a conexão",
+                "title_options": "Selecione uma opção",
+                "options": null
             },
-            "id": "pass",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "host.smtp.xys",
-            "title": {
-              "es": "Servidor:",
-              "en": "Server:"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "user@example.com",
+                        "title": {
+                            "es": "User:",
+                            "en": "Usuario:",
+                            "pr": "Usuário:"
+                        },
+                        "description": {
+                            "es": "Colocamos el mail con el cual nos conectaremos",
+                            "en": "Enter the e-mail with which we will connect to the server",
+                            "pr": "Colocamos o e-mail com o qual nos conectaremos"
+                        },
+                        "id": "user",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "******",
+                        "title": {
+                            "es": "Contraseña:",
+                            "en": "Password:",
+                            "pr": "Senha:"
+                        },
+                        "description": {
+                            "es": "Contraseña de la cuenta de correo o clave de aplicación",
+                            "en": "Password of the email account or application key",
+                            "pr": "Senha da conta de email ou chave de aplicação"
+                        },
+                        "id": "pass",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "host.smtp.xys",
+                        "title": {
+                            "es": "Servidor:",
+                            "en": "Server:",
+                            "pr": "Servidor:"
+                        },
+                        "description": {
+                            "es": "Colocamos el servidor con el cual nos conectaremos",
+                            "en": "Enter the server with which we will connect to the server",
+                            "pr": "Colocamos o servidor com o qual nos conectaremos"
+                        },
+                        "id": "host",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "517",
+                        "title": {
+                            "es": "Puerto:",
+                            "en": "Port:",
+                            "pr": "Porta:"
+                        },
+                        "description": {
+                            "es": "Colocamos el puerto con el cual nos conectaremos",
+                            "en": "Enter the port with which we will connect to the server",
+                            "pr": "Colocamos a porta com a qual nos conectaremos"
+                        },
+                        "id": "port",
+                        "css": "col-md-6",
+                        "data_type": "int",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "Variable",
+                        "title": {
+                            "es": "Asignar resultado a variable:",
+                            "en": "Assign result to a Variable:",
+                            "pr": "Atribuir resultado a uma variável:"
+                        },
+                        "description": {
+                            "es": "Colocamos el nombre de la variable en la que queremos guardar el resultado",
+                            "en": "Enter the name of the variable in which we want to save the result",
+                            "pr": "Colocamos o nome da variável na qual queremos salvar o resultado"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-6",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "checkbox",
+                        "placeholder": "True",
+                        "title": {
+                            "es": "Conexión SSL",
+                            "en": "SSL Conection",
+                            "pr": "Conexão SSL"
+                        },
+                        "description": {
+                            "es": "Activamos la conexión con SSL",
+                            "en": "Activate the SSL connection",
+                            "pr": "Ativar a conexão SSL"
+                        },
+                        "id": "ssl",
+                        "css": "col-md-6",
+                        "data_type": "bool",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "description": {
-              "es": "Colocamos el servidor con el cual nos conectaremos",
-              "en": "Enter the server with which we will connect to the server"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "ConnectSmtp",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts",
+            "linux": true,
+            "windows": true,
+            "mac": true,
+            "docker": true
+        },
+        {
+            "en": {
+                "title": "Validate emails",
+                "description": "Validate emails",
+                "title_options": "Select Option",
+                "options": null
             },
-            "id": "host",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "517",
-            "title": {
-              "es": "Puerto:",
-              "en": "Port:"
+            "es": {
+                "title": "Validar email",
+                "description": "Valida un email",
+                "title_options": "Seleccione una opción",
+                "options": null
             },
-            "description": {
-              "es": "Colocamos el puerto con el cual nos conectaremos",
-              "en": "Enter the port with which we will connect to the server"
+            "pr": {
+                "title": "Validar email",
+                "description": "Valida um email",
+                "title_options": "Selecione uma opção",
+                "options": null
             },
-            "id": "port",
-            "css": "col-md-6"
-          },
-          {
-            "type": "input",
-            "placeholder": "Variable",
-            "title": {
-              "es": "Asignar resultado a variable:",
-              "en": "Assign result to a Variable:"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "example_mail@server.com",
+                        "title": {
+                            "es": "Email",
+                            "en": "Email",
+                            "pr": "Email"
+                        },
+                        "description": {
+                            "es": "Colocamos el mail a validar si existe",
+                            "en": "Put the email to validate if exists",
+                            "pr": "Colocamos o e-mail para validar se existe"
+                        },
+                        "id": "email",
+                        "css": "col-md-12"
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "resultado_email",
+                        "title": {
+                            "es": "Asignar resultado a variable",
+                            "en": "Assign result to a variable",
+                            "pr": "Atribuir resultado a uma variável"
+                        },
+                        "description": {
+                            "es": "Resultado de la validación",
+                            "en": "Result of the validation",
+                            "pr": "Resultado da validação"
+                        },
+                        "remove_vars": true,
+                        "id": "result",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    }
+                ]
             },
-            "description": {
-              "es": "Colocamos el nombre de la variable en la que queremos guardar el resultado",
-              "en": "Enter the name of the variable in which we want to save the result"
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "validate_email",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts",
+            "linux": true,
+            "windows": true,
+            "mac": true,
+            "docker": true
+        },
+        {
+            "en": {
+                "title": "Forward email for ID",
+                "description": "This command allows you to forward an email by ID",
+                "title_options": "Select Option",
+                "options": null
             },
-            "remove_vars": true,
-            "id": "result",
-            "css": "col-md-6"
-          },
-          {
-            "type": "checkbox",
-            "placeholder": {
-              "es": "True",
-              "en": "True"
+            "es": {
+                "title": "Reenviar email por ID",
+                "description": "Este comando permite reenviar un email por ID",
+                "title_options": "Seleccione una opción",
+                "options": null
             },
-            "title": {
-              "es": "Conexión SSL",
-              "en": "SSL Conection "
+            "pr": {
+                "title": "Reenviar email por ID",
+                "description": "Este comando permite reenviar um email por ID",
+                "title_options": "Selecione uma opção",
+                "options": null
             },
-            "description": {
-              "es": "Activamos la conexión con SSL",
-              "en": "Activate the SSL connection"
+            "form": {
+                "css": "modal-lg",
+                "inputs": [
+                    {
+                        "type": "input",
+                        "placeholder": "355",
+                        "title": {
+                            "es": "ID Email",
+                            "en": "Email ID",
+                            "pr": "ID do Email"
+                        },
+                        "description": {
+                            "es": "ID del email a reenviar",
+                            "en": "Email ID to forward",
+                            "pr": "ID do email para reenviar"
+                        },
+                        "id": "id_",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "inbox",
+                        "title": {
+                            "es": "Carpeta",
+                            "en": "Folder",
+                            "pr": "Pasta"
+                        },
+                        "description": {
+                            "es": "Colocamos la carpeta donde se encuentra el email",
+                            "en": "We put the folder where the email is located",
+                            "pr": "Colocamos a pasta onde se encontra o email"
+                        },
+                        "help": {
+                            "es": "Opcional. Por defecto inbox",
+                            "en": "Optional. By default inbox",
+                            "pr": "Opcional. Por padrão inbox"
+                        },
+                        "id": "folder",
+                        "css": "col-md-4",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "test@email.com",
+                        "title": {
+                            "es": "Email:",
+                            "en": "Email:",
+                            "pr": "Email:"
+                        },
+                        "description": {
+                            "es": "Email que recibira el mail",
+                            "en": "Email that will receive the mail",
+                            "pr": "Email que receberá o email"
+                        },
+                        "id": "email",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "type": "input",
+                        "placeholder": "Subject",
+                        "title": {
+                            "es": "Asunto:",
+                            "en": "Subject:",
+                            "pr": "Assunto:"
+                        },
+                        "help": {
+                            "es": "Dejar vacio para que tome el asunto original",
+                            "en": "Leave empty to take the original subject",
+                            "pr": "Deixe vazio para pegar o assunto original"
+                        },
+                        "description": {
+                            "es": "Asunto del email",
+                            "en": "Subject of the email",
+                            "pr": "Assunto do email"
+                        },
+                        "id": "subject",
+                        "css": "col-md-12",
+                        "data_type": "str",
+                        "default": null,
+                        "required": false
+                    }
+                ]
             },
-            "id": "ssl",
-            "css": "col-md-6"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "ConnectSmtp",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts",
-      "linux": true,
-      "windows": true,
-      "mac": true,
-      "docker": true
-    },
-    {
-      "en": {
-        "title": "Validate emails",
-        "description": "Validate emails",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Validar email",
-        "description": "Valida un email",
-        "title_options": "Seleccione una opción",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "example_mail@server.com",
-            "title": {
-              "es": "Email",
-              "en": "Email"
-            },
-            "description": {
-              "es": "Colocamos el mail a validar si existe",
-              "en": "Put the email to validate if exists"
-            },
-            "id": "email",
-            "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "resultado_email",
-            "title": {
-              "es": "Resultado",
-              "en": "Result"
-            },
-            "description": {
-              "es": "Resultado de la validación",
-              "en": "Result of the validation"
-            },
-            "remove_vars": true,
-            "id": "result",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "validate_email",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts",
-      "linux": true,
-      "windows": true,
-      "mac": true,
-      "docker": true
-    },
-    {
-      "en": {
-        "title": "Forward email for ID",
-        "description": "Forward email for ID",
-        "title_options": "Select Option",
-        "options": null
-      },
-      "es": {
-        "title": "Reenviar email por ID",
-        "description": "Reenviar email por ID",
-        "title_options": "Seleccione una opción",
-        "options": null
-      },
-      "form": {
-        "css": "modal-lg",
-        "inputs": [
-          {
-            "type": "input",
-            "placeholder": "355",
-            "title": {
-              "es": "ID Email",
-              "en": "Email ID"
-            },
-            "description": {
-              "es": "ID del email a reenviar",
-              "en": "Email ID to forward"
-            },
-            "id": "id_",
-            "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "test@email.com",
-            "title": {
-              "es": "Email:",
-              "en": "Email:",
-              "cn": "Email:"
-            },
-            "description": {
-              "es": "Email que recibira el mail",
-              "en": "Email that will receive the mail"
-            },
-            "id": "email",
-            "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "Subject",
-            "title": {
-              "es": "Asunto:",
-              "en": "Subject:"
-            },
-            "help": {
-              "es": "Dejar vacio para que tome el asunto original",
-              "en": "Leave empty to take the original subject"
-            },
-            "description": {
-              "es": "Asunto del email",
-              "en": "Subject of the email"
-            },
-            "id": "subject",
-            "css": "col-md-12"
-          }
-        ]
-      },
-      "video_youtube": "aMV6cXPMMSo",
-      "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
-      "module": "forward",
-      "module_name": "emailAdvanced",
-      "visible": true,
-      "options": false,
-      "father": "module",
-      "group": "scripts",
-      "linux": true,
-      "windows": true,
-      "mac": true,
-      "docker": true
-    }
-  ]
+            "video_youtube": "",
+            "icon": " data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPpSURBVHic7ZlJaNZAFIC//C4oriBKwYoHqVZpXdCDHlwPiqgIWhHBiwfFS/Ei6kGlV1ERbyoetLgXFVwQpIJ1PdiD4g5FpRVcEFRstS5/6+H9U5Np8jfJJDbifDD8f+Ylb957meXNBCwWi8VisVgsFovlP8RJWF8ZUAWUAwMT1m1KK/AIqANaklbeD9gH/AI6M16+AzUk/PKPZ8CxqGV/Us6vyIAzcUoHMD+JbnANWOC6bgZ2A+8S0J0kY4CtwChX3TkVgFlAaQglbUBD4RegL/AFGOC6ZyrwwMjU9JiD2K94CzJ5Rek6T4BBBQVlmuxN2h4YMgSvvW0An4k+fhYWFC7T6q//FTfiMxGvvc05onfXduBZ4f9STTYcGGpiYYo4wDqtrskBSoAthJsDWoEjwI3C9UOgQrvnLbANqEWi3Ns4yEq1E5isyRq63x6NxwQPkzvAdNMGDHCAlUgPD7LxqGkjH4oo7wTywCFgpGlDEQjjuCqLTBoaqSn7gSyJfg19BDYhy2ZaOMik3Bhgg18JM+wDma0pu19QWEtwg0/5s4IkRRjH88AFra4Vw/3Aek3hKZdsPjJBBhl0ERhr0jjhHT+D7E7nabJGw/bZoyms0eR9kW7/KcC4tsIzA4hGVMcVG7V7jilBCZINngkoJ4FqoI9myCVN4ZoAg0cgO698gLFNwKoUHVfoGe8OJbhZRKG7VGsKmzT5tB4cmAHcLaK/HpiUguOKK9ozXUEPmwofdinrD/x0yTqAwT0EACCHzB3vA9r4DuwFKpEJdS3Fl7NfSFcu5rjipfZspRLsDeH8N2QnpajQ5K9CGOBmODIs3EGMUsK8cTcD8Q7BPIW5Ry0DM5H9sh95pPs1u+qqkLM1xVXiJRXlSCDCLo0dwFkkrX3Ww71upiDLtOIFMC7C893YjveNmB4vrUYCnERXD9Lv1ndZCeJmZhO06+cx9ShOA+eRFHYNcs4wDBla9Uhy1WSgXw9clN7jyz28EV1Q/PZe5wReezcoQS6GMgcYr9UZRzRlEu0Bo/FG8zPJf2BJEofum7Sug9E4PcAvmp1xrfsLjMGbo3xC8hBAArAEeE33mbcFWOyjMPEJJWV0e5+4L3LAAaRb65QCB33qk14B0kYPgMfeJIZA1gNQ9IXlkCXhtc+DLbiWiyIK/7UhYGxvK965IqvH4Ap9ftNfYGTeaArnmipMkSl4bW1HPuV3EScVvo2krIo6YBfezVIWKAE2a3W3kB2oEfOQXVmcbWxvl+WmziuiflDNQjH+COLGQfbk7RlwrKfyEzn08R3upjl8KXI4UkH2VoOvyHeIOuQAxGKxWCwWi8VisVgsit+o4sMxILFnxwAAAABJRU5ErkJggg==",
+            "module": "forward",
+            "module_name": "emailAdvanced",
+            "visible": true,
+            "options": false,
+            "father": "module",
+            "group": "scripts",
+            "linux": true,
+            "windows": true,
+            "mac": true,
+            "docker": true
+        }
+    ]
 }

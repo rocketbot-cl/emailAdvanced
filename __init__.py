@@ -11,20 +11,27 @@ try:
     from email.mime.base import MIMEBase
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
+    from email.header import Header
     import re
     import sys
     import traceback
+
+
+    GetParams = GetParams # type: ignore
+    SetVar = SetVar # type: ignore
+    GetGlobals = GetGlobals # type: ignore
+    PrintException = PrintException # type: ignore
     
     # Add the module's lib folder to the path
-    base_path = tmp_global_obj["basepath"]
+    base_path = tmp_global_obj["basepath"] # type: ignore
     cur_path = base_path + 'modules' + os.sep + 'emailAdvanced' + os.sep + 'libs' + os.sep
     if cur_path not in sys.path:
         sys.path.append(cur_path)
 
     # external libraries
-    import mailparser
-    from mailparser import mailparser
-    from mail_common import Mail
+    import mailparser # type: ignore
+    from mailparser import mailparser # type: ignore
+    from mail_common import Mail # type: ignore
     from bs4 import BeautifulSoup
     outenc = sys.stdout.encoding or sys.getfilesystemencoding()
 
@@ -59,7 +66,7 @@ global  mod_email_advanced_sessions
 SESSION_DEFAULT = "default"
 # Initialize settings for the module here
 try:
-    if not mod_email_advanced_sessions:
+    if not mod_email_advanced_sessions: # type: ignore
         mod_email_advanced_sessions = {SESSION_DEFAULT: {"email": GetGlobals('email'), "smtp": True, "imap": True}}
 except NameError:
     mod_email_advanced_sessions = {SESSION_DEFAULT: {"email": GetGlobals('email'), "smtp": True, "imap": True}}
@@ -153,6 +160,7 @@ try:
     if module == "LeerTodo":
 
         id_correo = GetParams('id_correo')
+        folder = GetParams('folder') or "inbox"
         result = GetParams('result')
         path_mail = GetParams('path_mail')
         path_attachment = GetParams('path_attachment')
@@ -171,7 +179,7 @@ try:
         
         if user and password:
             server.login(user, password)
-        server.select('inbox', readonly=False)
+        server.select(folder, readonly=False)
 
         if id_correo:
             rv, data = server.fetch(id_correo, '(RFC822)')
@@ -228,14 +236,14 @@ try:
     if module == "MarkUnread":
         imap = mod_email_advanced_sessions[session]["email"]
         id_correo = GetParams('id_correo')
-
+        folder = GetParams('folder') or imap.EMAIL_FOLDER
    
         if imap.IMAP_SSL:
             imap.server_imap = imaplib.IMAP4_SSL(imap.IMAP_SERVER, imap.IMAP_PORT)
         else:
             imap.server_imap = imaplib.IMAP4(imap.IMAP_SERVER, imap.IMAP_PORT)
         imap.server_imap.login(imap.FROM_EMAIL, imap.FROM_PWD)
-        imap.server_imap.select(imap.EMAIL_FOLDER, readonly=False)
+        imap.server_imap.select(folder, readonly=False)
         imap.server_imap.store(id_correo, '-FLAGS', '(\Seen)')
         imap.server_imap.close()
         imap.server_imap.logout()
@@ -267,6 +275,7 @@ try:
         subject = GetParams("subject")
         body_ = GetParams("msg")
         cc = GetParams('cc')
+        bcc = GetParams('bcc')
         attached_file = GetParams('path')
         files = GetParams('folder')
         filenames = []
@@ -293,19 +302,18 @@ try:
         
         if not cc:
             cc = ""
-        
+        if not bcc:
+            bcc = ""
         msg = MIMEMultipart()
         msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
         msg['Subject'] = subject
 
-        to_ = to_.split(",")
-        if cc:
-            cc = cc.split(",")
-            toAddress = to_ + cc
-        else:
-            toAddress = to_
+        def split_emails(emails):
+            return emails.split(",") if emails else []
+        
+        toAddress= split_emails(to_) + split_emails(cc)
         
         if not body_:
             body_ = ""
@@ -325,7 +333,8 @@ try:
                     part.set_payload((attachment).read())
                     attachment.close()
                     encoders.encode_base64(part)
-                    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+                    header = Header(filename, 'utf-8')
+                    part.add_header('Content-Disposition', "attachment; filename= %s" % header.encode())
                     msg.attach(part)
 
         else:
@@ -337,11 +346,18 @@ try:
                     part.set_payload((attachment).read())
                     attachment.close()
                     encoders.encode_base64(part)
-                    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+                    header = Header(filename, 'utf-8')
+                    part.add_header('Content-Disposition', "attachment; filename= %s" % header.encode())
                     msg.attach(part)
 
-        text = msg.as_string()
-        server.sendmail(user, toAddress, text)
+        if toAddress:
+            text = msg.as_string()
+            server.sendmail(user, toAddress, text)
+        if bcc:
+            msg['Bcc'] = bcc
+            text = msg.as_string()
+            toAddress= split_emails(bcc)
+            server.sendmail(user, toAddress, text)
         # server.close()
 
 
@@ -376,6 +392,8 @@ try:
             mod_email_advanced_sessions[session]["imap"] = True
             SetVar(result, True)
         except Exception as e:
+            if "login failed" in str(e).lower():
+                raise Exception("Login failed. If you are using Office 365 or Outlook, Please note that IMAP connections have been disabled.")
             SetVar(result, False)
             PrintException()
             raise e
@@ -420,8 +438,7 @@ try:
             raise e
         
     if module == "validate_email":
-        from validate_email import validate_email
-        import DNS
+        from validate_email import validate_email # type: ignore
         email = GetParams("email")
         result = GetParams("result")
         try:
@@ -441,6 +458,7 @@ try:
         to_ = GetParams('email')
         result_ = GetParams('result')
         subject = GetParams('subject')
+        folder = GetParams('folder') or "inbox"
         try:
             email_advanced = mod_email_advanced_sessions[session]["email"]
             
@@ -460,16 +478,59 @@ try:
             imap_host = imap.IMAP_SERVER
             imap_port = imap.IMAP_PORT
             ssl_imap = imap.IMAP_SSL
-            from mail_common import Mail
+            from mail_common import Mail # type: ignore
             mail = Mail(user, password, 99,
                     smtp_host=smtp_host, smtp_port=smtp_port,
                     imap_host=imap_host, imap_port=imap_port)
 
-            mail.forward_email(id_, "inbox", temp_folder, to_, subject)
+            mail.forward_email(id_, folder, temp_folder, to_, subject)
             rmtree(temp_folder)
         except Exception as e:
             PrintException()
             raise e
+
+    if module == "getEmails":
+        result_ = GetParams('result')
+        filter_ = GetParams('filter') or "ALL"
+        folder = GetParams('folder') or "inbox"
+        
+        imap = mod_email_advanced_sessions[session]["email"]
+        host = imap.IMAP_SERVER
+        port = imap.IMAP_PORT
+        ssl = imap.IMAP_SSL
+        user = imap.FROM_EMAIL
+        password = imap.FROM_PWD
+
+        if ssl:
+            server = imaplib.IMAP4_SSL(host, port)
+        else:
+            server = imaplib.IMAP4(host, port)
+        
+        if user and password:
+            server.login(user, password)
+        
+        print("logged in")
+        try:
+            server.select(folder)
+        except:
+            print("error selecting folder. Using default 'inbox'")
+            server.select("inbox")
+        search_ = filter_
+        result, data = server.search(None, search_)
+
+        print("result: ", result)
+        print("data: ", data)
+
+
+        ids = data[0]
+        id_list = ids.split()
+        server.close()
+
+
+
+        if result_:
+            SetVar(result_, [b.decode() for b in id_list])
+        
 
 except Exception as e:
     traceback.print_exc()
