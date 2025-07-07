@@ -317,8 +317,14 @@ try:
         
         if not body_:
             body_ = ""
-        body = body_.replace("\n", "<br/>")
-        msg.attach(MIMEText(body, 'html'))
+        if "<html" in body_.lower():
+            msg.attach(MIMEText(body_, 'html'))
+        else:
+            body_html = body_.replace("\n", "<br/>")
+            msg.attach(MIMEText(body_html, 'html'))
+
+        # body = body_.replace("\n", "<br/>")
+        # msg.attach(MIMEText(body, 'html'))
 
         if files:
             for f in os.listdir(files):
