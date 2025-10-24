@@ -278,7 +278,13 @@ try:
         bcc = GetParams('bcc')
         attached_file = GetParams('path')
         files = GetParams('folder')
+        from_param = GetParams('from_') 
         filenames = []
+        timeout_param = GetParams("timeout")
+        try:
+            timeout = int(timeout_param) if timeout_param else 180
+        except:
+            timeout = 180
 
         host = smtp.SMTP_SERVER
         port = smtp.SMTP_PORT
@@ -289,9 +295,9 @@ try:
         # print(email.SMTP_SERVER, email.SMTP_PORT, type(email.SMTP_PORT))
         
         if ssl == True:
-            server = smtplib.SMTP_SSL(host, port)
+            server = smtplib.SMTP_SSL(host,port,timeout=timeout)
         else:
-            server = smtplib.SMTP(host, port)
+            server = smtplib.SMTP(host, port,timeout=timeout)
         
         if user and password:
             try:
@@ -305,6 +311,7 @@ try:
         if not bcc:
             bcc = ""
         msg = MIMEMultipart()
+        
         msg['From'] = user
         msg['To'] = to_
         msg['Cc'] = cc
