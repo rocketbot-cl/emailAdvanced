@@ -25,11 +25,13 @@ Comando para enviar email com formato html, cc e múltiplos arquivos
 | --- | --- | --- |
 |Para|Aqui colocamos o destinatários para quem queremos enviar um email|user@email.com,person@mail.net|
 |Cc|Aqui colocamos o destinatários para quem queremos enviar uma cópia do email|cc@email.com,cc2@mail.net|
+|Remessa|Correio do qual a mensagem será enviada|usuario@dominio.com|
 |Bcc|Selecione para enviar uma cópia oculta|bcc@mail.com, bcc2@mail.com|
 |Assunto|Aqui colocamos o assunto do email|Check out this Rocketbot message|
 |Mensagem|Aqui colocamos a mensagem que queremos enviar|Hi person. This message was sent from Rocketbot. Bye|
 |Anexo|Aqui colocamos o os arquivos anexados|path/to/file.ext|
 |anexar múltiplos arquivos|Aqui colocamos o os arquivos anexados|path/to/folder|
+|Tempo de espera|Tempo de espera para que a mensagem seja enviada|Timeout|
 
 ### Mover email de pasta
   
