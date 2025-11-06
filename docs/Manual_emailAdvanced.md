@@ -2,118 +2,123 @@
 
 
 
-# Email avanzado
+# Advanced email
   
-Módulo con opciones avanzadas para el manejo de correos  
+Module with advanced options for handling emails  
 
 *Read this in other languages: [English](Manual_emailAdvanced.md), [Português](Manual_emailAdvanced.pr.md), [Español](Manual_emailAdvanced.es.md)*
   
 ![banner](imgs/Banner_emailAdvanced.png)
-## Como instalar este módulo
+## How to install this module
   
-Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
-1. Manual: __Descargar__ el archivo .zip y descomprimirlo en la carpeta modules. El nombre de la carpeta debe ser el mismo al del módulo y dentro debe tener los siguientes archivos y carpetas: \__init__.py, package.json, docs, example y libs. Si tiene abierta la aplicación, refresca el navegador para poder utilizar el nuevo modulo.
-2. Automática: Al ingresar a Rocketbot Studio sobre el margen derecho encontrara la sección de **Addons**, seleccionar **Install Mods**, buscar el modulo deseado y presionar install.  
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
+
+## Como usar este modulo
+El modulo de emailAdvanced debe usarse en conjunto con el modulo de email nativo. Como primera accion, debemos ir a la seccion de modulos y buscar el modulo "Email", luego "SMTP-IMAP" y utilizar el comando "Configurar servidor". Debemos completar los campos con los datos del servidor, puerto, contraseña y mail. Marca SSL de ser necesario. Una vez hecho esto, ya podremos utilizar los comandos del modulo.
 
 
-## Descripción de los comandos
+## Description of the commands
 
-### Enviar email avanzado
+### Send advanced email
   
-Comando para enviar email con formato html, cc y multiples archivos
-|Parámetros|Descripción|ejemplo|
+Command to send html format email, cc and multiple files
+|Parameters|Description|example|
 | --- | --- | --- |
-|Para|Aqui colocamos el o los destinatarios a los que deseamos enviar un mail|user@email.com,person@mail.net|
-|Cc|Aqui colocamos el o los destinatarios a los que deseamos enviar una copia del mail|cc@email.com,cc2@mail.net|
-|Copia Oculta|Seleccionar para enviar una copia oculta|bcc@mail.com, bcc2@mail.com|
-|Asunto|Aqui colocamos el asunto del mail|Check out this Rocketbot message|
-|Mensaje|Aqui colocamos el mensaje que deseamos enviar|Hi person. This message was sent from Rocketbot. Bye|
-|Adjunto|Aqui colocamos el o los archivos adjuntos|path/to/file.ext|
-|Adjuntar multiples archivos|Aqui colocamos el o los archivos adjuntos|path/to/folder|
+|To|Here we put the recipients to whom we want to send an email|user@email.com,person@mail.net|
+|Cc|Here we put the recipients to whom we want to send a copy of the email|cc@email.com,cc2@mail.net|
+|from_|Email address from which the message will be sent|usuario@dominio.com|
+|Bcc|Select to send a hidden copy|bcc@mail.com, bcc2@mail.com|
+|Subject|Here we put the subject of the email|Check out this Rocketbot message|
+|Message|Here we put the message that we want to send|Hi person. This message was sent from Rocketbot. Bye|
+|Attachment|Here we put the files that we want to attach|path/to/file.ext|
+|attach multiple files|Here we put the files that we want to attach|path/to/folder|
+|Timeout|Waiting time for message to be sent|Timeout|
 
-### Mover email de carpeta
+### Move email to folder
   
-Este comando te permite mover un email a otra carpeta
-|Parámetros|Descripción|ejemplo|
+This command allows you to move an email to another folder
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID de mail|ID del mail a mover|ID mail|
-|Carpeta origen|Colocamos la carpeta origen|Carpeta origen|
-|Carpeta de destino|Colocamos la carpeta de destino|carpeta|
-|Asignar a variable|Colocamos la variable a la que se asignará el resultado|variable|
+|Email ID|ID of the mail to move|ID mail|
+|Origin folder|We put the origin folder|Carpeta origen|
+|Destination folder|We put the destination folder|carpeta|
+|Set to variable|We put the variable to which the result will be assigned|variable|
 
-### Obtener todos los emails
+### Get all emails
   
-Este comando te permite obtener todos los emails de una carpeta con la opción de filtrar
-|Parámetros|Descripción|ejemplo|
+This command allows you to get all emails from a folder with the option to filter
+|Parameters|Description|example|
 | --- | --- | --- |
-|Filtro|Colocamos el filtro que deseamos aplicar|SUBJECT "Test Rocketbot"|
-|Carpeta|Colocamos la carpeta de la que queremos obtener los emails|inbox|
-|Asignar a variable|Colocamos la variable donde queremos que se guarde la data|variable|
+|Filter|We put the filter that we want to apply|SUBJECT "Test Rocketbot"|
+|Folder|We put the folder from which we want to obtain the emails|inbox|
+|Set to variable|We put the variable where we want to save the data|variable|
 
-### Leer toda la data de un email
+### Read all data from email
   
-Puedes leer toda la data de un email
-|Parámetros|Descripción|ejemplo|
+Read all data from email
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID de mail|Colocamos el ID del mail a leer|ID|
-|Carpeta|Colocamos la carpeta de la que queremos obtener los emails|inbox|
-|Asignar a variable|Colocamos la variable donde queremos que se guarde la data|variable|
-|Ruta guardar email|Colocamos la ruta donde queremos que se guarde el mail|C:/Users/User/Desktop|
-|Ruta donde se descargaran los adjuntos|Colocamos la ruta donde queremos que se guarden los adjuntos|C:/Users/User/Desktop|
+|Email ID|We put the ID of the mail to read|ID|
+|Folder|We put the folder from which we want to obtain the emails|inbox|
+|Set to variable|We put the variable where we want to save the data|variable|
+|Email save path|We put the path where we want to save the mail|C:/Users/User/Desktop|
+|Attachment save path|We put the path where we want to save the attachments|C:/Users/User/Desktop|
 
-### Marcar email como no leído
+### Mark mail as unread
   
-Marcar email como no leído
-|Parámetros|Descripción|ejemplo|
+Mark mail as unread by ID
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID de mail|Colocamos el ID del mail para marcar como no leido|ID|
-|Carpeta|Colocamos la carpeta donde se encuentra el email|inbox|
+|Email ID|We put the ID of the mail to mark as unread.|ID|
+|Folder|We put the folder where the email is located|inbox|
 
-### Listar carpetas
+### List email folders
   
-Lista carpetas del servidor de correos
-|Parámetros|Descripción|ejemplo|
+List email folders
+|Parameters|Description|example|
 | --- | --- | --- |
-|Asignar a variable|Colocamos la variable donde queremos que se guarde el resultado|Variable|
+|Set to var|We put the variable where we want to save the result.|Variable|
 
-### Conexión Imap
+### Connect Imap
   
-Usar solo si el comando nativo no permite leer mails
-|Parámetros|Descripción|ejemplo|
+User only if native command not working to read emails
+|Parameters|Description|example|
 | --- | --- | --- |
-|Usuario|Usuario de la cuenta de correo|user@example.com|
-|Contraseña|Contraseña de la cuenta de correo o clave de aplicación|******|
-|Servidor|Servidor de correo|host.imap.xys|
-|Puerto|Puerto de conexión|517|
-|Asignar resultado a variable|Variable donde se guardará el resultado de la conexión|Variable|
-|Conexión SSL|Conectar con SSL|True|
+|User|User of the email account|user@example.com|
+|Password|Password of the email account or application key|******|
+|Server|Email server|host.imap.xys|
+|Port|Connection port|517|
+|Assign result to a Variable|Variable where the result of the connection will be saved|Variable|
+|SSL Conection|Connect with SSL|True|
 
-### Conexión SMTP
+### Connect SMTP
   
-Usar solo si el comando nativo no permite la conexión
-|Parámetros|Descripción|ejemplo|
+User only if native command not working connection
+|Parameters|Description|example|
 | --- | --- | --- |
-|User|Colocamos el mail con el cual nos conectaremos|user@example.com|
-|Contraseña|Contraseña de la cuenta de correo o clave de aplicación|******|
-|Servidor|Colocamos el servidor con el cual nos conectaremos|host.smtp.xys|
-|Puerto|Colocamos el puerto con el cual nos conectaremos|517|
-|Asignar resultado a variable|Colocamos el nombre de la variable en la que queremos guardar el resultado|Variable|
-|Conexión SSL|Activamos la conexión con SSL|True|
+|Usuario|Enter the e-mail with which we will connect to the server|user@example.com|
+|Password|Password of the email account or application key|******|
+|Server|Enter the server with which we will connect to the server|host.smtp.xys|
+|Port|Enter the port with which we will connect to the server|517|
+|Assign result to a Variable|Enter the name of the variable in which we want to save the result|Variable|
+|SSL Conection|Activate the SSL connection|True|
 
-### Validar email
+### Validate emails
   
-Valida un email
-|Parámetros|Descripción|ejemplo|
+Validate emails
+|Parameters|Description|example|
 | --- | --- | --- |
-|Email|Colocamos el mail a validar si existe|example_mail@server.com|
-|Asignar resultado a variable|Resultado de la validación|resultado_email|
+|Email|Put the email to validate if exists|example_mail@server.com|
+|Assign result to a variable|Result of the validation|resultado_email|
 
-### Reenviar email por ID
+### Forward email for ID
   
-Este comando permite reenviar un email por ID
-|Parámetros|Descripción|ejemplo|
+This command allows you to forward an email by ID
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID Email|ID del email a reenviar|355|
-|Carpeta|Colocamos la carpeta donde se encuentra el email|inbox|
-|Email|Email que recibira el mail|test@email.com|
-|Asunto|Asunto del email|Subject|
+|Email ID|Email ID to forward|355|
+|Folder|We put the folder where the email is located|inbox|
+|Email|Email that will receive the mail|test@email.com|
+|Subject|Subject of the email|Subject|

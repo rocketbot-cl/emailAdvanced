@@ -1,6 +1,6 @@
 {
     "author": "José González - Danilo Toro - Rocketbot",
-    "description": "Módulo con opciones avanzadas para el manejo de correos",
+    "description": "Module with advanced options for managing emails",
     "description_lang": {
         "es": "Módulo con opciones avanzadas para el manejo de correos",
         "en": "Module with advanced options for handling emails",
@@ -15,7 +15,7 @@
     "docker": true,
     "type": "module",
     "name": "emailAdvanced",
-    "version": "3.5.4",
+    "version": "3.5.5",
     "title": {
         "es": "Email avanzado",
         "en": "Advanced email",
@@ -93,6 +93,22 @@
                         "data_type": "str",
                         "default": null,
                         "required": false
+                    },
+                    {
+                    "type": "input",
+                    "placeholder": "usuario@dominio.com",
+                    "title": {
+                        "es": "Remitente",
+                        "en": "from_",
+                        "pr":"Remessa"
+                    },
+                    "description": {
+                        "es": "Correo desde el cual se enviará el mensaje",
+                        "en": "Email address from which the message will be sent",
+                        "pr": "Correio do qual a mensagem será enviada"
+                    },
+                    "id": "from",
+                    "css": "col-md-12"
                     },
                     {
                       "type": "input",
@@ -194,6 +210,22 @@
                         "data_type": "str",
                         "default": null,
                         "required": false
+                    },
+                    {
+                    "type": "input",
+                    "placeholder": "Timeout",
+                    "title": {
+                        "es": "Tiempo de espera",
+                        "en": "Timeout",
+                        "pr":"Tempo de espera"
+                    },
+                    "description": {
+                        "es": "Tiempo de espera para el envio del mensaje",
+                        "en": "Waiting time for message to be sent",
+                        "pr": "Tempo de espera para que a mensagem seja enviada"
+                    },
+                    "id": "timeout",
+                    "css": "col-md-6"
                     }
                 ]
             },
